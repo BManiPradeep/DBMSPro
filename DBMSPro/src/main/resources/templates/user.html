@@ -21,10 +21,10 @@
 
 
             </ul>
-            <form class="d-flex">
-                <a class="btn btn-light my-2 my-sm-0 mr-1" th:if="${#authorization.expression('isAnonymous()')}" href="/login" type="submit">Login</a>
-                <a class="btn btn-light my-2 my-sm-0" sec:authorize="isAnonymous()" href="/register" type="submit">Signup</a>
-            </form>
+<!--            <form class="d-flex">-->
+<!--                <a class="btn btn-light my-2 my-sm-0 mr-1" th:if="${#authorization.expression('isAnonymous()')}" href="/login" type="submit">Login</a>-->
+<!--                <a class="btn btn-light my-2 my-sm-0" sec:authorize="isAnonymous()" href="/register" type="submit">Signup</a>-->
+<!--            </form>-->
         </div>
     </div>
 </nav>
@@ -44,3 +44,14 @@
 
 </body>
 </html>
+
+<!--<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">-->
+<!--    <title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1> email is ${email}</h1>-->
+<!--</body>-->
+<!--</html>-->
