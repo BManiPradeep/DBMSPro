@@ -21,6 +21,8 @@ public class User {
     private String street;
     private Long pin;
 
+    private String user_type ;
+
     private LocalDate dob;
     @Transient
     private Integer age;
@@ -29,6 +31,7 @@ public class User {
     public Long getId() {
         return id;
     }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -98,6 +101,14 @@ public class User {
         this.pin = pin;
     }
 
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
+
     public LocalDate getDob() {
         return dob;
     }
@@ -114,32 +125,53 @@ public class User {
         this.age = age;
     }
 
-    public User(Long user_id, String user_fname, String user_lname, String username, String user_email, String user_password, String city, String street, Long pin, LocalDate dob) {
-        this.id = user_id;
-        this.fname = user_fname;
-        this.lname = user_lname;
+    public User(Long id, String fname, String lname, String username, String email, String password, String city, String street, Long pin, String user_type, LocalDate dob, Integer age) {
+        this.id = id;
+        this.fname = fname;
+        this.lname = lname;
         this.username = username;
-        this.email = user_email;
-        this.password = user_password;
+        this.email = email;
+        this.password = password;
         this.city = city;
         this.street = street;
         this.pin = pin;
+        this.user_type = user_type;
         this.dob = dob;
+        this.age = age;
     }
 
     public User() {
     }
 
-    public User(String user_fname, String user_lname, String username, String user_email, String user_password, String city, String street, Long pin, LocalDate dob) {
-        this.fname = user_fname;
-        this.lname = user_lname;
+    public User(String fname, String lname, String username, String email, String password, String city, String street, Long pin, String user_type, LocalDate dob, Integer age) {
+        this.fname = fname;
+        this.lname = lname;
         this.username = username;
-        this.email = user_email;
-        this.password = user_password;
+        this.email = email;
+        this.password = password;
         this.city = city;
         this.street = street;
         this.pin = pin;
+        this.user_type = user_type;
         this.dob = dob;
+        this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", pin=" + pin +
+                ", user_type='" + user_type + '\'' +
+                ", dob=" + dob +
+                ", age=" + age +
+                '}';
+    }
 }

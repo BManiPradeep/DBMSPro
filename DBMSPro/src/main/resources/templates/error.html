@@ -1,5 +1,6 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,17 +8,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" >
     <link rel="map" th:href="@{/css/bootstrap.min.css.map}" >
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>Home</title>
-
+    <link rel="stylesheet" th:href="@{/font4/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <title>Error</title>
 </head>
-<body style="background-color:#E9ECEF;">
 
+<body>
+<!-- NAV BAR -->
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img th:src="@{/images/img.png}"  alt="" width="auto" height="60">
+            <img th:src="@{/images/white_logo1.png}" alt="none"  width="auto" height="60">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,43 +35,37 @@
             <li class="hoverable">
                 <a class="nav-link" th:href="@{/about}" href="./about.html">About</a>
             </li>
-        <li class="hoverable">
-                    <a class="nav-link" th:href="@{/cart}" href="#">Cart</a>
-        </li> -->
             <li class="hoverable">
                 <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="./login.html">Login</a>
+            </li>
+            <li class="hoverable">
+                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/dashboard}" href="./dashboard.html">Profile</a>
             </li>
             <li class="hoverable">
                 <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="./home.html">Logout</a>
             </li>
         </ul>
     </div>
-    <script th:src="@{./javascript/myscripts.js}"></script>
-
+    <script src="./javascript/myscripts.js"></script>
 </nav>
-<!-- </div> -->
-<!--  for image -->
-<style>
-    .container {
-        position: relative;
-        font-family: Arial,serif;
-        margin: 0 auto;
-    }
-</style>
 
+<!-- BODY -->
+<!-- for image -->
 <div class="container-image">
-    <img th:src="@{/images/about.png}" alt="none" style="width:100%;">
+    <img th:src="@{./images/error.png}" alt="error image" style="width:100%;">
 </div>
+
+
+<!-- FOOTER -->
+
 <footer class="footer-distributed">
 
     <div class="footer-left">
-        <img th:src="@{/images/img.png}"  alt="none">
+        <img src="images/white_logo1.png">
 
         <p class="footer-links">
-            <a href="/">Home</a>
-            |
-            <a href="/about">About</a>
-            |
+            <a href="/">Home</a> |
+            <a href="/about">About</a> |
             <a href="/contact">Contact</a>
         </p>
 
@@ -80,8 +75,8 @@
     <div class="footer-center">
         <div>
             <i class="fa fa-map-marker"></i>
-            <p><span>Karimnagar
-                         Telangana- 834001</span>
+            <p><span>Karim Nagar
+                        Telangana</span>
             </p>
         </div>
 
@@ -96,8 +91,8 @@
     </div>
     <div class="footer-right">
         <p class="footer-company-about">
-            <span>Sai Balaji Medical Store</span>
-           Store Description</p>
+            <span>Sai Balaji Store</span> Store Description
+        </p>
         <div class="footer-icons">
             <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
@@ -108,9 +103,12 @@
     </div>
 </footer>
 
+
 <script type="text/javascript" th:src="@{/javascript/jquery-3.4.1.slim.min.js}"></script>
 <script type="text/javascript" th:src="@{/javascript/popper.min.js}"></script>
 <script type="text/javascript" th:src="@{/javascript/bootstrap.bundle.min.js}"></script>
 <script type="text/javascript" th:src="@{/javascript/bootstrap.min.js}"></script>
+
 </body>
+
 </html>

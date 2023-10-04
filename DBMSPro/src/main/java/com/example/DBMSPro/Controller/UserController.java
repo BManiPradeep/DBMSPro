@@ -36,7 +36,15 @@ public class UserController {
 //    @ResponseBody
     public String registration(@ModelAttribute("user") User userDto,
                                HttpSession session){
-        int x=userService.addUser(userDto);
+        int u=userService.addUser(userDto);
+        System.out.println("U : ");
+        System.out.println(u);
+        if(u==0)
+        {
+            return "redirect:/register?error=true";
+        } else if (u==-1) {
+            return "error";
+        }
         session.setAttribute("registrationSuccess", true);
         session.setAttribute("user",userDto);
         return "redirect:/user";

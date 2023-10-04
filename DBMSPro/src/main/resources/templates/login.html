@@ -30,7 +30,7 @@
                         <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
 
                         <p class="text-white-50 mb-5">Please enter your login details!</p>
-                        <form th:action="@{/login}" th:object="${User}" method="post">
+                        <form th:action="@{/login}" th:object="${user}" method="post">
                             <div class="form-group mt-3">
 
                                 <input type="text" name="email" id="email" placeholder="Email"
@@ -125,37 +125,3 @@
 </body>
 
 </html>
-
-
-<!--    <div class="container">-->
-<!--        <a class="navbar-brand" href="#">-->
-<!--            <img th:src="@{/images/white_logo1.png}"  src="./images/white_logo1.png" width="auto" height="60">-->
-<!--        </a>-->
-<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"-->
-<!--                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"-->
-<!--                aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-<!--    </div>-->
-<!--    <div class="container-fluid">-->
-<!--        <ul class="nav navbar-nav">-->
-<!--            <li class="hoverable">-->
-<!--                <a class="nav-link" th:href="@{/}" href="./home.html">Home</a>-->
-<!--            </li>-->
-<!--            <li class="hoverable">-->
-<!--                <a class="nav-link" th:href="@{/shop}" href="./shop.html">Shop</a>-->
-<!--            </li>-->
-<!--            <li class="hoverable">-->
-<!--                <a class="nav-link" th:href="@{/about}" href="./about.html">About</a>-->
-<!--            </li>-->
-
-<!--            <li class="hoverable">-->
-<!--                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/register}" href="./register.html">Register</a>-->
-<!--            </li>-->
-<!--            &lt;!&ndash;                <li class="hoverable">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/register}" href="./register.html">Logout</a>&ndash;&gt;-->
-<!--            &lt;!&ndash;                </li>&ndash;&gt;-->
-
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <script th:src="@{./javascript/myscripts.js}"></script>-->

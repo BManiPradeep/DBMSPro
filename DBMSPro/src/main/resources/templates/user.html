@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>User index Page</title>
@@ -22,8 +22,8 @@
 
             </ul>
             <form class="d-flex">
-                <a class="btn btn-light my-2 my-sm-0 mr-1" href="/login" type="submit">Login</a>
-                <a class="btn btn-light my-2 my-sm-0" href="/register" type="submit">Signup</a>
+                <a class="btn btn-light my-2 my-sm-0 mr-1" th:if="${#authorization.expression('isAnonymous()')}" href="/login" type="submit">Login</a>
+                <a class="btn btn-light my-2 my-sm-0" sec:authorize="isAnonymous()" href="/register" type="submit">Signup</a>
             </form>
         </div>
     </div>

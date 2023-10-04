@@ -32,6 +32,8 @@ public class LoginController {
             model.addAttribute("registrationSuccess", true);
             session.removeAttribute("registrationSuccess");
         }
+        User user=new User();
+        model.addAttribute("user",user);
         return "login";
     }
 
@@ -39,11 +41,12 @@ public class LoginController {
     public String login(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
         // Perform authentication logic using email and password
         User user=userService.authenticate(email,password);
-//        System.out.println("Login called");
+        System.out.println("Login called");
         if(user==null){
             session.setAttribute("loginUnSuccess",true);
             return "login";
         }else{
+            System.out.println(user);
             session.setAttribute("loginUnSuccess",false);
             session.setAttribute("user",user);
             return "redirect:/user";
@@ -58,4 +61,5 @@ public class LoginController {
         }
         return "redirect:/home";
     }
+
 }
