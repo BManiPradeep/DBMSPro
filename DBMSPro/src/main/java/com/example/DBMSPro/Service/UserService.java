@@ -29,17 +29,6 @@ public class UserService{
         return userRepository.findAll();
     }
 
-//    public int addUser(User user) {
-//        //write conditions for errors if users are present*************
-//        if (user.getPassword() != null) {
-//            String password=user.getPassword();
-//            password= passwordEncoder.encode(password);
-//            user.setPassword(password);
-//            userRepository.save(user);
-//        }else System.out.println("User Password is null");
-//        return 1;
-//    }
-
 //    @Override
     public User checkUsernameExists(String username) {
         try {
