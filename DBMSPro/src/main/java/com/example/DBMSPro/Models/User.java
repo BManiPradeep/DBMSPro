@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Entity
-@Table(name="USER")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +16,11 @@ public class User {
     private String username;
     private String email;
     private String password;
+
+
+    @OneToOne
+    @JoinColumn(name = "roleId", nullable = false)
+    private Role role;
     private String city;
     private String street;
     private Long pin;
@@ -27,6 +31,14 @@ public class User {
     @Transient
     private Integer age;
 
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
