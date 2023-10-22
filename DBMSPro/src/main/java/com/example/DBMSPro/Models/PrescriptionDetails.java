@@ -2,11 +2,9 @@ package com.example.DBMSPro.Models;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name="PRESCRIPTIONDETAILS")
+import java.util.UUID;
+
 public class PrescriptionDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long PrescriptionId;
     private Long OrderId;
     private String PrescriptionDes;
@@ -17,6 +15,9 @@ public class PrescriptionDetails {
     }
 
     public void setPrescriptionId(Long prescriptionId) {
+        if(prescriptionId==0){
+            prescriptionId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        }
         PrescriptionId = prescriptionId;
     }
 
@@ -45,6 +46,7 @@ public class PrescriptionDetails {
     }
 
     public PrescriptionDetails() {
+        this.PrescriptionId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;;
     }
 
     public PrescriptionDetails(Long orderId, String prescriptionDes, String verificationStatus) {

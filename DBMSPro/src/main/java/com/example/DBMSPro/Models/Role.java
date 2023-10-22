@@ -1,15 +1,12 @@
 package com.example.DBMSPro.Models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
-@Entity
 public class Role {
-    @Id
     long roleId = 2;
-    String roleName = "ROLE_CUSTOMER";
+    String roleName = "USER";
 
     public long getRoleId() {
         return roleId;

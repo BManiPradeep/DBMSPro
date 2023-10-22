@@ -29,22 +29,18 @@
                         <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
 
                         <p class="text-white-50 mb-5">Please enter your login details!</p>
-                        <form th:action="@{/logins}"  method="post">
+                        <form method="post" role="form" th:action="@{/login}">
                             <div class="form-group mt-3">
-
                                 <input type="text" name="email" id="email" placeholder="Email"
                                        class="form-control form-control-lg">
                             </div>
 
 
                             <div class="form-group mt-3">
-
                                 <input type="password" class="form-control form-control-lg" placeholder="Password"
                                        name="password" id="password">
                             </div>
                             <button class="btn btn-outline-light btn-lg px-15 mt-3" type="submit">Login</button>
-
-
                         </form>
                     </div>
 

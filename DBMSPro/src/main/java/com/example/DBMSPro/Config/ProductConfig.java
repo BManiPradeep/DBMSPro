@@ -1,13 +1,6 @@
 package com.example.DBMSPro.Config;
 
-import com.example.DBMSPro.Models.Product;
-import com.example.DBMSPro.Repository.ProductsRepository;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.time.LocalDate;
-import java.time.Month;
 
 @Configuration
 public class ProductConfig {

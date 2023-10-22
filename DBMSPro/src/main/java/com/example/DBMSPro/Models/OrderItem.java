@@ -2,11 +2,9 @@ package com.example.DBMSPro.Models;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name="ORDERITEM")
+import java.util.UUID;
+
 public class OrderItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ItemId;
     private Long OrderId;
     private Long ProductId;
@@ -14,6 +12,7 @@ public class OrderItem {
     private float UnitPrice;
 
     public OrderItem() {
+        this.ItemId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
     public OrderItem(Long itemId, Long orderId, Long productId, Long quantity, float unitPrice) {
@@ -36,6 +35,9 @@ public class OrderItem {
     }
 
     public void setItemId(Long itemId) {
+        if(itemId==0){
+            itemId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        }
         ItemId = itemId;
     }
 

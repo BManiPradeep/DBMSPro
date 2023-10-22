@@ -6,10 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+import java.util.UUID;
+
 public class Supplier {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long SupplierId;
     private String SupplierName;
     private String PhoneNo;
@@ -20,6 +19,9 @@ public class Supplier {
     }
 
     public void setSupplierId(Long supplierId) {
+        if(supplierId==0){
+            supplierId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        }
         SupplierId = supplierId;
     }
 
@@ -48,6 +50,7 @@ public class Supplier {
     }
 
     public Supplier() {
+        this.SupplierId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
 

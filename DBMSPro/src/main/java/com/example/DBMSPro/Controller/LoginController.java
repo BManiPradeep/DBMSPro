@@ -24,38 +24,27 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
+    @GetMapping(value={"/login","/signin"})
     public String login(Model model, HttpSession session) {
-        Boolean registrationSuccess = (Boolean) session.getAttribute("registrationSuccess");
-
-        if (registrationSuccess != null && registrationSuccess) {
-            model.addAttribute("registrationSuccess", true);
-            session.removeAttribute("registrationSuccess");
-        }
         User user = new User();
         model.addAttribute("user", user);
         return "login";
     }
 
-    @PostMapping("/logins")
-    public String login(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
+    @PostMapping("/login")
+    public String loginUser(
+            @RequestParam("email") String email,
+            @RequestParam("password") String password,
+            Model model) {
+        System.out.println("In loginuser");
         System.out.println(email);
         System.out.println(password);
-        // Perform authentication logic using email and password
-        User user=userService.authenticate(email,password);
-//        return user;
-        System.out.println("Login called1");
-        if(user==null){
-//            session.setAttribute("loginUnSuccess",true);
-//            return "redirect:/unsuccess";
-            return "redirect:/login";
-        }else{
-//            return "redirect:/success";
-            System.out.println(user);
-            model.addAttribute("email",user.getEmail());
-//            session.setAttribute("loginUnSuccess",false);
-            session.setAttribute("user",user);
-            return "redirect:/user";
+        boolean authenticated = userService.authenticate(email, password);
+        if (authenticated) {
+            return "user";
+        } else {
+            model.addAttribute("error", "Invalid email or password");
+            return "login";
         }
     }
 

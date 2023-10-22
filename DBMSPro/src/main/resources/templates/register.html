@@ -54,54 +54,54 @@
                     <h2 class="fw-bold mb-2 text-uppercase"> Register</h2>
 
                     <p class="text-white-50 mb-5">Please enter your details to register</p>
-                    <form th:action="@{/register/save}" method="post">
+                    <form th:action="@{/register/save}" th:object="${user}" method="post">
                         <div class="form-group mt-3">
-                            <input type="text" name="fname" id="fname" required placeholder="First Name:" class="form-control form-control-lg">
+                            <input type="text" name="fname" th:field="*{fname}" required placeholder="First Name:" class="form-control form-control-lg">
                         </div>
                         <!--    <input type="text" id="user_fname" name="fname" required><br><br>-->
 
                         <div class="form-group mt-3">
 
-                            <input type="text" name="lname" id="lname" required placeholder="Last Name" class="form-control form-control-lg">
+                            <input type="text" name="lname" th:field="*{lname}" required placeholder="Last Name" class="form-control form-control-lg">
                         </div>
 
                         <div class="form-group mt-3">
 
-                            <input type="text" name="username" id="username" required placeholder="Username" class="form-control form-control-lg">
-                        </div>
-
-
-                        <div class="form-group mt-3">
-
-                            <input type="email" name="email" id="user_email" required placeholder="Email" class="form-control form-control-lg">
+                            <input type="text" name="username" th:field="*{username}" required placeholder="Username" class="form-control form-control-lg">
                         </div>
 
 
                         <div class="form-group mt-3">
 
-                            <input type="password" name="password" id="password" required placeholder="Password" class="form-control form-control-lg">
+                            <input type="email" name="email" th:field="*{email}" required placeholder="Email" class="form-control form-control-lg">
                         </div>
 
 
                         <div class="form-group mt-3">
 
-                            <input type="text" name="city" id="city" required placeholder="City" class="form-control form-control-lg">
+                            <input type="password" name="password" th:field="*{password}" required placeholder="Password" class="form-control form-control-lg">
                         </div>
 
 
                         <div class="form-group mt-3">
 
-                            <input type="text" name="street" id="street" required placeholder="Street" class="form-control form-control-lg">
+                            <input type="text" name="city" th:field="*{city}" required placeholder="City" class="form-control form-control-lg">
+                        </div>
+
+
+                        <div class="form-group mt-3">
+
+                            <input type="text" name="street" th:field="*{street}" required placeholder="Street" class="form-control form-control-lg">
                         </div>
 
                         <div class="form-group mt-3">
 
-                            <input type="text" name="pin" id="pin" required placeholder="PIN" class="form-control form-control-lg">
+                            <input type="text" name="pin" th:field="*{pin}" required placeholder="PIN" class="form-control form-control-lg">
                         </div>
 
                         <div class="form-group mt-3">
 
-                            <input type="date" name="dob" id="dob" required placeholder="Date of Birth" class="form-control form-control-lg">
+                            <input type="date" name="dob" th:field="*{dob}" required placeholder="Date of Birth" class="form-control form-control-lg">
                         </div>
 
 

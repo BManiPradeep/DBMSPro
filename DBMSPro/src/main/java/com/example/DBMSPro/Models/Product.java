@@ -3,25 +3,15 @@ package com.example.DBMSPro.Models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-@Entity
-@Table(name="PRODUCT")
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ProductId")
     private Long ProductId;
-    @Column(name = "ProductName")
     private String ProductName;
-    @Column(name = "ProductDescription")
     private String ProductDescription;
-    @Column(name = "Price")
     private Long Price;
-    @Column(name = "StockQuantity")
     private Long StockQuantity;
-    @Column(name = "SupplierId")
     private Long SupplierId;
-    @Column(name = "ExpiryDate")
     private LocalDate ExpiryDate;
 
     public Long getProductId() {
@@ -29,6 +19,9 @@ public class Product {
     }
 
     public void setProductId(Long productId) {
+        if(productId==0){
+            productId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        }
         this.ProductId = productId;
     }
 
@@ -81,6 +74,7 @@ public class Product {
     }
 
     public Product() {
+        this.ProductId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
     public Product(String productName, String productDescription, Long price, Long stockQuantity, Long supplierId, LocalDate expiryDate) {

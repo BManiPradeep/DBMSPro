@@ -3,12 +3,9 @@ package com.example.DBMSPro.Models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-@Entity
-@Table(name="ORDERS")
 public class Orders {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long order_id ;
     private Long user_id ;
     private Long DriverID;
@@ -22,6 +19,9 @@ public class Orders {
     }
 
     public void setOrder_id(Long order_id) {
+        if(order_id==0){
+            order_id=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        }
         this.order_id = order_id;
     }
 
@@ -74,6 +74,7 @@ public class Orders {
     }
 
     public Orders() {
+        this.order_id=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
     public Orders(Long order_id, Long user_id, Long driverID, LocalDate orderedDate, float orderTotal, LocalDate deliveredDate, String order_status) {

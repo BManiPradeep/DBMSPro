@@ -2,11 +2,9 @@ package com.example.DBMSPro.Models;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name="DELIVERYPARTNER")
+import java.util.UUID;
+
 public class DeliveryPartner {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long DriverId;
     private String DFname;
     private String DLname;
@@ -18,6 +16,9 @@ public class DeliveryPartner {
     }
 
     public void setDriverId(Long driverId) {
+        if(driverId==0){
+            driverId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        }
         DriverId = driverId;
     }
 
@@ -62,6 +63,7 @@ public class DeliveryPartner {
     }
 
     public DeliveryPartner() {
+        this.DriverId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
     public DeliveryPartner(String DFname, String DLname, float rating, String phoneNo) {

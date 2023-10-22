@@ -1,7 +1,8 @@
 package com.example.DBMSPro.Service;
+import com.example.DBMSPro.Models.Role;
 import com.example.DBMSPro.Models.User;
+import com.example.DBMSPro.Repository.RoleRepository;
 import com.example.DBMSPro.Repository.UserRepository;
-import com.sun.security.auth.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -9,28 +10,40 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service("userDetailsService")
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
-    @Autowired
+    private final RoleRepository roleRepository;
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.getAllUsers();
     }
 
-//    @Override
+    public boolean authenticate(String email, String password) {
+        // Find the user by their email address
+        User user = userRepository.loadUserByUsername(email);
+        System.out.println(user);
+
+        if (user == null || !user.getPassword().equals(password)) {
+            System.out.println("Incorrect Password in service");
+            return false;
+        }
+        return true;
+    }
+
+
     public User checkUsernameExists(String username) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM user WHERE username=?",
@@ -41,49 +54,9 @@ public class UserService implements UserDetailsService {
         }
     }
 
-//    @Override
-    public int addUser(User user) {
-
-        String password = user.getPassword();
-        user.setPassword(password);
-        if (user.getUser_type() == null) {
-            user.setUser_type("USER");
-        }
-        System.out.println(user);
-        if (checkUsernameExists(user.getUsername()) == null) {
-            try
-            {
-                 userRepository.save(user);
-                 return 1;
-            } catch (Exception e) {
-                return -1;
-            }
-        }
-        else
-        {
-            //give message username already exists
-            System.out.println("Username already exist");
-            return 0;
-        }
-    }
-
-    public User findUserByEmail(String email){
-        return userRepository.findUserByEmail(email);
-    }
-
-
-    public User authenticate(String email, String password) {
-        System.out.println(email);
-        User user=userRepository.findUserByEmail(email);
-        if (user!=null&&user.getEmail().equals(email) && password==user.getPassword()) {
-            return user; // Authentication successful, return the user object
-        }
-        System.out.println("No user found");
-        return null;
-    }
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return new MyUserDetails(userRepository.findUserByEmail(email));
+        System.out.println(email);
+        return new MyUserDetails(userRepository.loadUserByUsername(email));
     }
 }
