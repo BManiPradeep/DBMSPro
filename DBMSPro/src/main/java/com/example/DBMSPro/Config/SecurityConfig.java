@@ -33,10 +33,10 @@ public class SecurityConfig {
         http
 //                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/admin").hasAnyRole("ADMIN")
+//                        .requestMatchers("/admin").hasAnyRole("ADMIN")
                         .requestMatchers("/user").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/","/addToCart/**","/shop/**","/cart/**","/product/**","/product/delete/{ProductId}","/update_product/{prod_id}","/products","/addProduct","/resources/**","/home","/signin/**","/login/**","/register/**","/logout/**","/shop/**","/about/**","/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/","/checkout","/add_employee/**","admin/**","/addToCart/**","/shop/**","/cart/**","/product/**","/product/delete/{ProductId}","/update_product/{prod_id}","/products","/addProduct","/resources/**","/home","/signin/**","/login/**","/register/**","/logout/**","/shop/**","/about/**","/css/**", "/js/**", "/images/**").permitAll()
 //                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

@@ -78,9 +78,9 @@ public class UserRepository{
     }
 
     public User getUserById(long id){
-        String sql = "SELECT * FROM user WHERE UserId = :UserId";
+        String sql = "SELECT * FROM user WHERE id = :id";
         HashMap<String, Object> params = new HashMap<>();
-        params.put("UserId", id);
+        params.put("id", id);
         return namedParameterJdbcTemplate.queryForObject(sql, params, new UserRowMapper());
     }
 

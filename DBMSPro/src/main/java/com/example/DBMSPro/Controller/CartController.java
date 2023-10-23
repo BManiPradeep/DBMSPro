@@ -3,6 +3,7 @@ package com.example.DBMSPro.Controller;
 import com.example.DBMSPro.Models.Cart;
 import com.example.DBMSPro.Models.Product;
 import com.example.DBMSPro.Repository.CartRepository;
+import com.example.DBMSPro.Repository.OrderRepository;
 import com.example.DBMSPro.Repository.ProductRepository;
 import com.example.DBMSPro.Service.SecurityServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,14 @@ import java.util.Map;
 @Controller
 public class CartController {
 
-    SecurityServices securityServices;
-    CartRepository cartRepository;
-    ProductRepository productRepository;
-
     @Autowired
-    public CartController(SecurityServices securityServices, CartRepository cartRepository, ProductRepository productRepository) {
-        this.securityServices = securityServices;
-        this.cartRepository = cartRepository;
-        this.productRepository = productRepository;
-    }
+    SecurityServices securityServices;
+    @Autowired
+    CartRepository cartRepository;
+    @Autowired
+    ProductRepository productRepository;
+    @Autowired
+    OrderRepository orderRepository;
 
     @GetMapping("/cart")
     public String cart(Model model){
@@ -53,5 +52,34 @@ public class CartController {
         int user_id= Math.toIntExact(securityServices.findLoggedInUser().getId());
         int ct= cartRepository.AddToCart(prod_id,user_id);
         return "redirect:/cart";
+    }
+
+    @GetMapping("/checkout")
+    public String checkout()
+    {   int user_id= Math.toIntExact(securityServices.findLoggedInUser().getId());
+        List<Cart> productsInCart = cartRepository.GetCart(user_id);
+        int no_of_items=0;
+        for (Cart cartProduct : productsInCart) {
+            int prod_quantity= Math.toIntExact(productRepository.GetProductById(cartProduct.getProd_id()).getStockQuantity());
+            int cart_quantity=cartProduct.getProd_quantity()  ;
+            if(cart_quantity>prod_quantity) {
+                return "redirect:/cart?error=true";
+            }
+            no_of_items=no_of_items+1;
+        }
+
+        if(no_of_items==0)
+        {
+            return "redirect:/cart";
+        }
+
+        int o=orderRepository.addOrder(user_id);
+        if(o==0)  return "error";
+
+        for (Cart cartProduct : productsInCart) {
+            productRepository.ReduceProductQuantity(cartProduct.getProd_quantity(),cartProduct.getProd_id());
+        }
+        int c= cartRepository.ClearCart(user_id);
+        return "redirect:/cart?success=true";
     }
 }

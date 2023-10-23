@@ -45,24 +45,24 @@ CREATE TABLE PRODUCT (
                          image_path text,
                         FOREIGN KEY (SupplierId) REFERENCES Supplier(SupplierId)
 );
-CREATE TABLE ORDERS (
-                        order_id bigint AUTO_INCREMENT PRIMARY KEY,
-                        id bigint,
-                        DriverID bigint,
-                        OrderedDate DATE,
-                        OrderTotal FLOAT,
-                        DeliveredDate DATE,
-                        order_status VARCHAR(255),
-                        FOREIGN KEY (id) REFERENCES USER(id),
-                        FOREIGN KEY (DriverID) REFERENCES DELIVERYPARTNER(DriverID)
-);
-CREATE TABLE PRESCRIPTIONDETAILS (
-                                     PrescriptionId bigint AUTO_INCREMENT PRIMARY KEY,
-                                     order_id bigint,
-                                     PrescriptionDes VARCHAR(255),
-                                     VerificationStatus VARCHAR(255),
-                                     FOREIGN KEY (order_id) REFERENCES ORDERS(order_id)
-);
+# CREATE TABLE ORDERS (
+#                         order_id bigint AUTO_INCREMENT PRIMARY KEY,
+#                         id bigint,
+#                         DriverID bigint,
+#                         OrderedDate DATE,
+#                         OrderTotal FLOAT,
+#                         DeliveredDate DATE,
+#                         order_status VARCHAR(255),
+#                         FOREIGN KEY (id) REFERENCES USER(id),
+#                         FOREIGN KEY (DriverID) REFERENCES DELIVERYPARTNER(DriverID)
+# );
+# CREATE TABLE PRESCRIPTIONDETAILS (
+#                                      PrescriptionId bigint AUTO_INCREMENT PRIMARY KEY,
+#                                      order_id bigint,
+#                                      PrescriptionDes VARCHAR(255),
+#                                      VerificationStatus VARCHAR(255),
+#                                      FOREIGN KEY (order_id) REFERENCES ORDERS(order_id)
+# );
 CREATE TABLE ORDERITEM (
                            ItemId bigint AUTO_INCREMENT PRIMARY KEY,
                            order_id bigint,
@@ -81,6 +81,28 @@ create table cart_details
     foreign key (prod_id) references product(ProductId) on update cascade on delete restrict,
     primary key (user_id, prod_id),
     prod_quantity int default 1
+);
+
+create table employees
+(
+    emp_id int primary key auto_increment,
+    emp_fname varchar(20),
+    emp_lname varchar(20),
+    emp_email varchar(30),
+    emp_gender char,
+    emp_join_date date
+
+);
+
+create table orders
+(
+    order_id bigint primary key auto_increment,
+    user_id bigint ,
+    foreign key (user_id) references user(id) ,
+    emp_id bigint default 1,
+    foreign key (emp_id) references employees(emp_id) on update cascade on delete restrict,
+    order_status varchar(30) default "Order Placed"
+
 );
 -- Adding tuples to DELIVERYPARTNER table
 INSERT INTO DELIVERYPARTNER (DFname, DLname, Rating, PhoneNo)
