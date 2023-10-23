@@ -4,8 +4,6 @@ import com.example.DBMSPro.Models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +12,10 @@ public class MyUserDetails implements UserDetails {
 
     private User user;
 
+
     public MyUserDetails(User user) {
+//        System.out.println("Came to MyUserDetails and the user is");
+//        System.out.println(user);
         this.user = user;
     }
 
@@ -32,10 +33,8 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmail();
     }
-
-
 
 
     @Override
@@ -56,5 +55,13 @@ public class MyUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

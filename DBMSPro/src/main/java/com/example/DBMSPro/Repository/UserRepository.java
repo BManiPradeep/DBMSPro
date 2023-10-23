@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 
-@Repository
+@Component
 public class UserRepository{
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private RoleRepository roleRepository;
@@ -96,14 +97,11 @@ public class UserRepository{
         return namedParameterJdbcTemplate.queryForObject(sql, params, new UserRowMapper());
     }
 
-    public User loadUserByUsername(String email){
+    public User getUserByUsername(String email){
         String sql = "SELECT * FROM user WHERE Email = :Email";
-        System.out.println("Hell1");
-        System.out.println(email);
         HashMap<String, Object> params = new HashMap<>();
         params.put("Email", email);
         User user=namedParameterJdbcTemplate.queryForObject(sql, params,new UserRowMapper());
-        System.out.println(user);
         return user;
     }
 }

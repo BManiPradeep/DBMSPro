@@ -12,7 +12,8 @@ public class Product {
     private Long Price;
     private Long StockQuantity;
     private Long SupplierId;
-    private LocalDate ExpiryDate;
+    private String image_path;
+
 
     public Long getProductId() {
         return ProductId;
@@ -23,6 +24,14 @@ public class Product {
             productId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         }
         this.ProductId = productId;
+    }
+
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
     }
 
     public String getProductName() {
@@ -65,34 +74,26 @@ public class Product {
         this.SupplierId = supplierId;
     }
 
-    public LocalDate getExpiryDate() {
-        return ExpiryDate;
-    }
-
-    public void setExpiryDate(LocalDate expiryDate) {
-        this.ExpiryDate = expiryDate;
-    }
-
     public Product() {
         this.ProductId=(long) UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
-    public Product(String productName, String productDescription, Long price, Long stockQuantity, Long supplierId, LocalDate expiryDate) {
+    public Product(String productName, String productDescription, Long price, Long stockQuantity, Long supplierId, LocalDate expiryDate,String image_path) {
         this.ProductName = productName;
         this.ProductDescription = productDescription;
         this.Price = price;
         this.StockQuantity = stockQuantity;
         this.SupplierId = supplierId;
-        this.ExpiryDate = expiryDate;
+        this.image_path=image_path;
     }
-    public Product(Long productId, String productName, String productDescription, Long price, Long stockQuantity, Long supplierId, LocalDate expiryDate) {
+    public Product(Long productId, String productName, String productDescription, Long price, Long stockQuantity, Long supplierId, LocalDate expiryDate,String image_path) {
         this.ProductId = productId;
         this.ProductName = productName;
         this.ProductDescription = productDescription;
         this.Price = price;
         this.StockQuantity = stockQuantity;
         this.SupplierId = supplierId;
-        this.ExpiryDate = expiryDate;
+        this.image_path=image_path;
     }
 
 }

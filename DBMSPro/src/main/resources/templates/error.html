@@ -36,7 +36,7 @@
                 <a class="nav-link" th:href="@{/about}" href="./about.html">About</a>
             </li>
             <li class="hoverable">
-                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="./login.html">Login</a>
+                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signin}" href="./login.html">Login</a>
             </li>
             <li class="hoverable">
                 <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/dashboard}" href="./dashboard.html">Profile</a>

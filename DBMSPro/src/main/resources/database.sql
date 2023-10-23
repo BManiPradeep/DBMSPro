@@ -42,8 +42,8 @@ CREATE TABLE PRODUCT (
                          Price DECIMAL(10,2),
                          StockQuantity INT,
                          SupplierId bigint,
-                         ExpiryDate DATE,
-                         FOREIGN KEY (SupplierId) REFERENCES Supplier(SupplierId)
+                         image_path text,
+                        FOREIGN KEY (SupplierId) REFERENCES Supplier(SupplierId)
 );
 CREATE TABLE ORDERS (
                         order_id bigint AUTO_INCREMENT PRIMARY KEY,
@@ -128,58 +128,35 @@ VALUES
     ('Supplier9', '9012345678', 'supplier9@example.com'),
     ('Supplier10', '0123456789', 'supplier10@example.com');
 
--- Adding tuples to PRODUCT table
-INSERT INTO PRODUCT (ProductName, ProductDescription, Price, StockQuantity, SupplierId, ExpiryDate)
-VALUES
-    ('Product1', 'Description 1', 10.0, 100, 1, '2023-12-31'),
-    ('Product2', 'Description 2', 15.0, 200, 2, '2023-11-30'),
-    ('Product3', 'Description 3', 20.0, 150, 3, '2023-10-31'),
-    ('Product4', 'Description 4', 25.0, 120, 4, '2023-09-30'),
-    ('Product5', 'Description 5', 30.0, 180, 5, '2023-08-31'),
-    ('Product6', 'Description 6', 35.0, 90, 6, '2023-07-31'),
-    ('Product7', 'Description 7', 40.0, 70, 7, '2023-06-30'),
-    ('Product8', 'Description 8', 45.0, 110, 8, '2023-05-31'),
-    ('Product9', 'Description 9', 50.0, 130, 9, '2023-04-30'),
-    ('Product10', 'Description 10', 55.0, 160, 10, '2023-03-31');
-
--- Adding tuples to ORDERS table
-INSERT INTO ORDERS (id, DriverID, OrderedDate, OrderTotal, DeliveredDate, order_status)
-VALUES
-    (1, 1, '2023-09-15', 50.0, '2023-09-16', 'Delivered'),
-    (2, 2, '2023-09-16', 40.0, '2023-09-17', 'Delivered'),
-    (3, 3,'2023-09-17',60.0,'2023-09-18', 'Delivered'),
-    (4, 4, '2023-09-18', 55.0, '2023-09-19', 'Delivered'),
-    (5, 5, '2023-09-19', 70.0, '2023-09-20', 'Delivered'),
-    (6, 6, '2023-09-20', 65.0, '2023-09-21', 'Delivered'),
-    (7, 7, '2023-09-21', 80.0, '2023-09-22', 'Delivered'),
-    (8, 8, '2023-09-22', 75.0, '2023-09-23', 'Delivered'),
-    (9, 9, '2023-09-23', 90.0, '2023-09-24', 'Delivered'),
-    (10, 10, '2023-09-24', 85.0, '2023-09-25', 'Delivered');
-
--- Adding tuples to PRESCRIPTIONDETAILS table
-INSERT INTO PRESCRIPTIONDETAILS (order_id, PrescriptionDes, VerificationStatus)
-VALUES
-    (1, 'Prescription for Order 1', 'Verified'),
-    (2, 'Prescription for Order 2', 'Pending'),
-    (3, 'Prescription for Order 3', 'Verified'),
-    (4, 'Prescription for Order 4', 'Pending'),
-    (5, 'Prescription for Order 5', 'Verified'),
-    (6, 'Prescription for Order 6', 'Pending'),
-    (7, 'Prescription for Order 7', 'Verified'),
-    (8, 'Prescription for Order 8', 'Pending'),
-    (9, 'Prescription for Order 9', 'Verified'),
-    (10, 'Prescription for Order 10', 'Pending');
+# -- Adding tuples to PRESCRIPTIONDETAILS table
+# INSERT INTO PRESCRIPTIONDETAILS (order_id, PrescriptionDes, VerificationStatus)
+# VALUES
+#     (1, 'Prescription for Order 1', 'Verified'),
+#     (2, 'Prescription for Order 2', 'Pending'),
+#     (3, 'Prescription for Order 3', 'Verified'),
+#     (4, 'Prescription for Order 4', 'Pending'),
+#     (5, 'Prescription for Order 5', 'Verified'),
+#     (6, 'Prescription for Order 6', 'Pending'),
+#     (7, 'Prescription for Order 7', 'Verified'),
+#     (8, 'Prescription for Order 8', 'Pending'),
+#     (9, 'Prescription for Order 9', 'Verified'),
+#     (10, 'Prescription for Order 10', 'Pending');
 
 -- Adding tuples to ORDERITEM table
-INSERT INTO ORDERITEM (order_id, ProductId, Quantity, UnitPrice)
-VALUES
-    (1, 1, 2, 10.0),
-    (2, 2, 3, 15.0),
-    (3, 3, 4, 20.0),
-    (4, 4, 5, 25.0),
-    (5, 5, 6, 30.0),
-    (6, 6, 7, 35.0),
-    (7, 7, 8, 40.0),
-    (8, 8, 9, 45.0),
-    (9, 9, 10, 50.0),
-    (10, 10, 11, 55.0);
+# INSERT INTO ORDERITEM (order_id, ProductId, Quantity, UnitPrice)
+# VALUES
+#     (1, 1, 2, 10.0),
+#     (2, 2, 3, 15.0),
+#     (3, 3, 4, 20.0),
+#     (4, 4, 5, 25.0),
+#     (5, 5, 6, 30.0),
+#     (6, 6, 7, 35.0),
+#     (7, 7, 8, 40.0),
+#     (8, 8, 9, 45.0),
+#     (9, 9, 10, 50.0),
+#     (10, 10, 11, 55.0);
+INSERT INTO product (ProductName, ProductDescription, Price, StockQuantity, SupplierId, image_path)
+VALUES ('Product1', 'Description1', 10.00, 100, 1,  'path1.jpg'),
+       ('Product2', 'Description2', 20.00, 200, 2, 'path2.jpg');
+
+-- Add more INSERT statements for the remaining 8 products

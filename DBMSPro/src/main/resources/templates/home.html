@@ -38,10 +38,9 @@
                     <a class="nav-link" th:href="@{/cart}" href="./cart.html">Cart</a>
         </li>
 
-
-                        <li class="hoverable">
-                            <a class="nav-link"  th:href="@{/login}" href="./login.html">Login</a>
-                        </li>
+            <li class="hoverable">
+                <a class="nav-link"  th:href="@{/signin}" href="./login.html">Login</a>
+            </li>
 
 <!--            <li class="hoverable">-->
 <!--                <a class="nav-link" th:if="${#authorization.expression('!isAuthenticated()')}" th:href="@{/login}" href="./login.html">Login</a>-->
@@ -49,8 +48,11 @@
 
 
                         <li class="hoverable">
-                            <a class="nav-link"  th:href="@{/dashboard}" >Profile</a>
+                            <a class="nav-link"   th:href="@{/user}" >Profile</a>
                         </li>
+            <li class="hoverable">
+                <a class="nav-link"   th:href="@{/admin}" >ADMIN</a>
+            </li>
 <!--            <li class="hoverable">-->
 <!--                <a class="nav-link" th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/dashboard}" >Profile</a>-->
 <!--            </li>-->
@@ -58,7 +60,7 @@
 
 
                         <li class="hoverable">
-                            <a class="nav-link" th:href="@{/logout}" href="./home.html">Logout</a>
+                            <a class="nav-link"  th:href="@{/logout}" href="./home.html">Logout</a>
                         </li>
 <!--            <li class="hoverable">-->
 <!--                <a class="nav-link" th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/logout}" href="./home.html">Logout</a>-->

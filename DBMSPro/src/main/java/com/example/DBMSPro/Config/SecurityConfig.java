@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -26,30 +27,31 @@ public class SecurityConfig {
         auth.userDetailsService(userService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/admin").hasAnyRole("ADMIN")
                         .requestMatchers("/user").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/","/home","/login/**","/register/**","/logout/**","/shop","/about","/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/","/product/**","/product/delete/{ProductId}","/update_product/{prod_id}","/products","/addProduct","/resources/**","/home","/signin/**","/login/**","/register/**","/logout/**","/shop/**","/about/**","/css/**", "/js/**", "/images/**").permitAll()
+//                        .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/")
-                        .usernameParameter("email")
-                        .passwordParameter("password")
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/signin")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/",true)
                 )
                 .logout((logout) ->
                         logout.deleteCookies("remove")
-                                .invalidateHttpSession(false)
                                 .logoutUrl("/logout")
-                                .logoutSuccessUrl("/"))
+                                .logoutSuccessUrl("/").permitAll()
+                )
                 .httpBasic(Customizer.withDefaults());
 
 
-        return http.build();
+        return http.csrf(AbstractHttpConfigurer::disable).build();
     }
 }

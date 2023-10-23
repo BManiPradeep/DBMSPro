@@ -25,8 +25,6 @@ public class UserRowMapper implements RowMapper<User> {
         user.setPin(resultSet.getLong("pin"));
         user.setUser_type(resultSet.getString("user_type"));
         user.setDob(resultSet.getDate("dob").toLocalDate());
-        System.out.println("MAPROW");
-        System.out.println(user);
         return user;
     }
 }
