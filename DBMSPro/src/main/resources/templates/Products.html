@@ -29,8 +29,10 @@
         <td th:text="${product.stockQuantity}"></td>
         <td><a href="" th:href="@{/update_product/{ProductId}(ProductId=${product.productId})}"
                class="btn btn-warning">Update</a></td>
-        <td><a href="" th:href="@{/product/delete/{ProductId}(ProductId=${product.productId})}"
-               class="btn btn-danger">Remove</a></td>
+<!--        <td><a href="" th:href="@{/product/delete/{ProductId}(ProductId=${product.productId})}"-->
+<!--               class="btn btn-danger">Remove</a></td>-->
+        <td><a th:href="@{/product/delete/{ProductId}(ProductId=${product.productId})}" class="btn btn-danger">Remove</a></td>
+
     </tr>
     </tbody>
 </table>

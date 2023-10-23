@@ -31,8 +31,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public int DeleteProduct(int ProductId) {
         try{
+            String sql="DELETE FROM product where ProductId = ?";
             System.out.println("CAME TO DEL PRDT REP IMPL");
-            return jdbcTemplate.update("DELETE FROM product where ProductId = ?",ProductId);
+            return jdbcTemplate.update(sql,ProductId);
         } catch (Exception e) {
             return 0;
         }

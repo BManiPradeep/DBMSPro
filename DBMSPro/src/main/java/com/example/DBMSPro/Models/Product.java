@@ -15,6 +15,7 @@ public class Product {
     private String image_path;
 
 
+
     public Long getProductId() {
         return ProductId;
     }

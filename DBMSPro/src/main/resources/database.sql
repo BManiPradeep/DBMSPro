@@ -72,6 +72,16 @@ CREATE TABLE ORDERITEM (
                            FOREIGN KEY (order_id) REFERENCES ORDERS(order_id),
                            FOREIGN KEY (ProductId) REFERENCES PRODUCT(ProductId)
 );
+
+create table cart_details
+(
+    user_id bigint ,
+    foreign key (user_id) references user(id) on update cascade on delete restrict ,
+    prod_id bigint,
+    foreign key (prod_id) references product(ProductId) on update cascade on delete restrict,
+    primary key (user_id, prod_id),
+    prod_quantity int default 1
+);
 -- Adding tuples to DELIVERYPARTNER table
 INSERT INTO DELIVERYPARTNER (DFname, DLname, Rating, PhoneNo)
 VALUES

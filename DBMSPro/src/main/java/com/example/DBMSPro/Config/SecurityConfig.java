@@ -36,7 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin").hasAnyRole("ADMIN")
                         .requestMatchers("/user").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/","/product/**","/product/delete/{ProductId}","/update_product/{prod_id}","/products","/addProduct","/resources/**","/home","/signin/**","/login/**","/register/**","/logout/**","/shop/**","/about/**","/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/","/addToCart/**","/shop/**","/cart/**","/product/**","/product/delete/{ProductId}","/update_product/{prod_id}","/products","/addProduct","/resources/**","/home","/signin/**","/login/**","/register/**","/logout/**","/shop/**","/about/**","/css/**", "/js/**", "/images/**").permitAll()
 //                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
