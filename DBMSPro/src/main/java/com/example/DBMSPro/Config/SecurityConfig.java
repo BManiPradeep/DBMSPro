@@ -34,9 +34,9 @@ public class SecurityConfig {
 //                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
 //                        .requestMatchers("/admin").hasAnyRole("ADMIN")
-                        .requestMatchers("/user").hasAnyRole("USER","ADMIN")
+//                        .requestMatchers("/user").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/","/checkout","/add_employee/**","admin/**","/addToCart/**","/shop/**","/cart/**","/product/**","/product/delete/{ProductId}","/update_product/{prod_id}","/products","/addProduct","/resources/**","/home","/signin/**","/login/**","/register/**","/logout/**","/shop/**","/about/**","/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/","/update_product/{ProductId}","/addProduct","/user","viewOrder/**","/Orders/**","/update_order/{order_id}","/checkout","/add_employee/**","admin/**","/addToCart/**","/shop/**","/cart/**","/product/**","/product/delete/{ProductId}","/update_product/{prod_id}","/products","/addProduct","/resources/**","/home","/signin/**","/login/**","/register/**","/logout/**","/shop/**","/about/**","/css/**", "/js/**", "/images/**").permitAll()
 //                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
@@ -50,8 +50,6 @@ public class SecurityConfig {
                                 .logoutSuccessUrl("/").permitAll()
                 )
                 .httpBasic(Customizer.withDefaults());
-
-
         return http.csrf(AbstractHttpConfigurer::disable).build();
     }
 }

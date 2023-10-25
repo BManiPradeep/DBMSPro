@@ -2,6 +2,7 @@ package com.example.DBMSPro.Controller;
 
 import com.example.DBMSPro.Models.Cart;
 import com.example.DBMSPro.Models.Product;
+import com.example.DBMSPro.Models.User;
 import com.example.DBMSPro.Repository.CartRepository;
 import com.example.DBMSPro.Repository.OrderRepository;
 import com.example.DBMSPro.Repository.ProductRepository;
@@ -47,11 +48,18 @@ public class CartController {
     }
 
     @GetMapping("/addToCart/{prod_id}")
-    public String addToCart(@PathVariable int prod_id )
+    public String addToCart(@PathVariable long prod_id )
     {
-        int user_id= Math.toIntExact(securityServices.findLoggedInUser().getId());
-        int ct= cartRepository.AddToCart(prod_id,user_id);
+        long user_id= (securityServices.findLoggedInUser().getId());
+        long ct= cartRepository.AddToCart(prod_id,user_id);
         return "redirect:/cart";
+    }
+
+    @GetMapping("/cart/removeItem/{ProductId}")
+    public String DeletefromCart(@PathVariable long ProductId){
+        long id=securityServices.findLoggedInUser().getId();
+        cartRepository.DeleteFromCart(ProductId,id);
+        return "cart";
     }
 
     @GetMapping("/checkout")

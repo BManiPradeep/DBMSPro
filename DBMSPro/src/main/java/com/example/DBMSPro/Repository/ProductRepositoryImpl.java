@@ -19,9 +19,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public int AddProduct(Product product) {
         try {
-            String sql = "INSERT INTO product (ProductId, ProductName, ProductDescription, Price, StockQuantity, SupplierId, image_path) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
-            return jdbcTemplate.update(sql, product.getProductId(), product.getProductName(), product.getProductDescription(),
+            String sql = "INSERT INTO product (ProductName, ProductDescription, Price, StockQuantity, SupplierId, image_path) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+            return jdbcTemplate.update(sql, product.getProductName(), product.getProductDescription(),
                     product.getPrice(), product.getStockQuantity(), product.getSupplierId(), product.getImage_path());
         } catch (Exception e){
             return 0;
@@ -32,7 +32,6 @@ public class ProductRepositoryImpl implements ProductRepository {
     public int DeleteProduct(int ProductId) {
         try{
             String sql="DELETE FROM product where ProductId = ?";
-            System.out.println("CAME TO DEL PRDT REP IMPL");
             return jdbcTemplate.update(sql,ProductId);
         } catch (Exception e) {
             return 0;
@@ -49,7 +48,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public int UpdateProduct(Product product, int prod_id) {
         String sql = "UPDATE product SET ProductName = ?, ProductDescription = ?, Price = ?, "
-                + "StockQuantity = ?, SupplierId = ?, ExpiryDate = ?, image_path = ? "
+                + "StockQuantity = ?, SupplierId = ?, image_path = ? "
                 + "WHERE ProductId = ?";
 
         return jdbcTemplate.update(sql,
@@ -70,7 +69,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Product GetProductById(int prod_id) {
+    public Product GetProductById(long prod_id) {
         String sql = "SELECT * FROM product WHERE ProductId = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{prod_id}, new BeanPropertyRowMapper<>(Product.class));
     }

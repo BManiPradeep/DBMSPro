@@ -34,8 +34,8 @@ public class ShopController {
 
     @GetMapping("/shop/view_product/{id}")
     public String viewProduct(@PathVariable Long id, Model model) {
-        Product product = productRepository.GetProductById(Math.toIntExact(id));
-
+        Product product = productRepository.GetProductById(id);
+        System.out.println(product);
         if (product != null) {
             model.addAttribute("product", product);
             return "showProduct"; // Assuming you have a Thymeleaf template named "view_product.html"

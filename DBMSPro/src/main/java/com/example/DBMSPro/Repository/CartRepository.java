@@ -7,20 +7,17 @@ import java.util.List;
 
 public interface CartRepository {
 
-    public int AddToCart(int prod_id, int user_id);
+    public int AddToCart(long prod_id, long user_id);
 
-    public int DeleteFromCart(int prod_id, int user_id);
-    public int deleteProductFromCarts(int prod_id);
+    public int DeleteFromCart(long prod_id, long user_id);
+    public int deleteProductFromCarts(long prod_id);
 
-    public int UpdateFromCart(int prod_id, int user_id,int quantity);
-    public int UpdateItemQuantity(Cart cart,int user_id,int prod_id);
-    public Cart getCartById(int user_id,int prod_id);
+    public int UpdateFromCart(long prod_id, long user_id,long quantity);
+    public int UpdateItemQuantity(Cart cart,long user_id,long prod_id);
+    public Cart getCartById(long user_id,long prod_id);
 
-    public  int ClearCart(int user_id);
+    public  int ClearCart(long user_id);
 
-    public List<Cart> GetCart(int user_id);
-    public int getQuantity(int prod_id,int user_id);
-
-
-
+    public List<Cart> GetCart(long user_id);
+    public int getQuantity(long prod_id,long user_id);
 }

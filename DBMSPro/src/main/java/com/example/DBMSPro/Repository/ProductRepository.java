@@ -15,7 +15,7 @@ public interface ProductRepository {
     public List<Product> ListProducts();
     public void incrementProductCount(Long productId, Long incrementAmount);
 
-    public Product GetProductById(int prod_id);
+    public Product GetProductById(long prod_id);
 
     public int ReduceProductQuantity(int quantity, int prod_id);
 

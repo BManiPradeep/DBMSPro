@@ -15,7 +15,7 @@ public class CartRepositoryImpl implements CartRepository {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public int AddToCart(int prod_id, int user_id) {
+    public int AddToCart(long prod_id, long user_id) {
         try{
             return jdbcTemplate.update("INSERT INTO cart_details (user_id, prod_id) VALUES(?,?)"
                     ,user_id,prod_id ) ;
@@ -28,7 +28,7 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    public int DeleteFromCart(int prod_id, int user_id) {
+    public int DeleteFromCart(long prod_id, long user_id) {
         try{
             return jdbcTemplate.update("DELETE FROM cart_details WHERE prod_id = ? AND user_id = ?", prod_id, user_id) ;
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    public int UpdateFromCart(int prod_id,int user_id,int quantity) {
+    public int UpdateFromCart(long prod_id,long user_id,long quantity) {
         try {
             return jdbcTemplate.update("UPDATE cart_details SET prod_quantity = ? WHERE user_id = ? AND prod_id = ?",
                     quantity, prod_id,user_id);
@@ -46,7 +46,7 @@ public class CartRepositoryImpl implements CartRepository {
         }
     }
     @Override
-    public int UpdateItemQuantity( Cart cart, int user_id, int prod_id) {
+    public int UpdateItemQuantity( Cart cart, long user_id, long prod_id) {
         try {
             return jdbcTemplate.update("UPDATE cart_details SET prod_quantity=? WHERE user_id=? AND prod_id=?",
                     new Object[]{cart.getProd_quantity(),user_id,prod_id});
@@ -56,12 +56,12 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    public int ClearCart(int user_id) {
+    public int ClearCart(long user_id) {
         return jdbcTemplate.update("DELETE FROM cart_details WHERE user_id=?", user_id);
     }
 
     @Override
-    public List<Cart> GetCart(int user_id) {
+    public List<Cart> GetCart(long user_id) {
 
         return jdbcTemplate.query("SELECT * FROM cart_details WHERE user_id=?"
                 ,new BeanPropertyRowMapper<Cart>(Cart.class),user_id);
@@ -69,18 +69,18 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    public Cart getCartById(int user_id,int prod_id) {
+    public Cart getCartById(long user_id,long prod_id) {
         return jdbcTemplate.queryForObject("SELECT * FROM cart_details WHERE user_id=? AND prod_id=?",
                 new BeanPropertyRowMapper<Cart>(Cart.class),user_id,prod_id);
     }
 
     @Override
-    public int deleteProductFromCarts(int prod_id){
+    public int deleteProductFromCarts(long prod_id){
         return jdbcTemplate.update("DELETE FROM cart_details where prod_id=?",prod_id);
     }
 
     @Override
-    public int getQuantity(int prod_id, int user_id) {
+    public int getQuantity(long prod_id, long user_id) {
         int quantity = jdbcTemplate.queryForObject("SELECT prod_quantity FROM cart_details where prod_id=? AND user_id=?",
                 Integer.class,prod_id,user_id);
         return quantity;

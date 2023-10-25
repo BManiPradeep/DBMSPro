@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,14 +9,13 @@
     <link rel="map" th:href="@{/css/bootstrap.min.css.map}" >
     <link rel="stylesheet" th:href="@{/font4/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}" >
-    <title>Orders</title>
+    <title>Update Order Status</title>
 </head>
-
 <body style="background-color:#E9ECEF;">
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img th:src="@{/images/white_logo1.png}"  src="./images/white_logo1.png" width="auto" height="60">
+            <img th:src="@{/images/white_logo1.png}" src="./images/white_logo1.png" width="auto" height="60">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -37,39 +35,53 @@
     </div>
     <script src="./javascript/myscripts.js"></script>
 </nav>
-<h3 class="mt-3">Orders</h3>
-<table class="table mt-3">
-    <thead class="thead-light">
-    <tr>
-        <th scope="col">SN</th>
-        <th scope="col">Order Id</th>
-        <th scope="col">Customer Id</th>
-        <th scope="col">Delivery Agent</th>
-        <th scope="col">Order Status</th>
-        <th scope="col">Update</th>
-    </tr>
-    </thead>
-    <tbody>
 
-    <tr th:each="order, iStat : ${orders}" th:with="user=${users.get(order)},employee=${employee.get(order)}">
-        <th scope="row" th:text="${iStat.index + 1}"></th>
-        <td th:text="${order.order_id}"></td>
-        <td th:text="${user}"></td>
-        <td th:text="${employee}"></td>
-        <td th:text="${order.order_status}"></td>
-        <td><a href="" th:href="@{/update_order/{id}(id=${order.order_id})}"
-               class="btn btn-warning">Update</a></td>
+<div class="container">
+    <h3 class="mt-3">Update Order Status</h3>
+    <form th:action="@{/update_order/{id}(id=${orders.order_id})}" method="post" th:object="${orders}" enctype="multipart/form-data">
+        <div class="row">
+            <!--            <div class="col-sm-5" style="width:800px; margin:0 auto;>-->
+            <div class = "col-sm-5">
+                <input type="hidden" name="id" th:field="*{order_id}">
+                <div class="form-group mt-3">
+                    <label form="Order Id">Order Id</label>
+                    <span><strong><span th:text="${orders.order_id}"></span></strong></span>
 
-    </tr>
-    </tbody>
-</table>
-<!--
-</div> -->
+                </div>
+                <input type="hidden" name="id" th:field="*{user_id}">
+                <div class="form-group mt-3">
+                    <label form="User Id">User Id</label>
+                    <span><strong><span th:text="${orders.user_id}"></span></strong></span>
+
+                </div>
+
+                <div class="form-group mt-3">
+                    <label form="Employee">Select Delivery Person</label>
+                    <select class="form-control" th:field="*{emp_id}" id="empid" name="empid">
+                        <option th:each="emp :${emps}"
+                                th:value="${emp.emp_id}"
+                                th:text="${emp.emp_fname}"
+                        >
+                    </select>
+                </div>
+                <div class="form-group mt-3">
+                    <label form="Order Status">Order Status</label>
+                    <input type="text" class="form-control" required th:field="*{order_status}" name="orderstatus" id="orderstatus"
+                           placeholder="Order Status">
+
+                </div>
+                <button type="submit" class="btn btn-outline-dark btn-lg px-15 mt-3">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</form>
+</div>
 
 <footer class="footer-distributed">
 
     <div class="footer-left">
-        <img th:src="@{/images/white_logo1.png}"  src="./images/white_logo1.png">
+        <img th:src="@{/images/white_logo1.png}" src="images/white_logo1.png">
 
         <p class="footer-links">
             <a href="#">Home</a>
@@ -114,11 +126,10 @@
         </div>
     </div>
 </footer>
-
 <script type="text/javascript" th:src="@{/javascript/jquery-3.4.1.slim.min.js}"></script>
 <script type="text/javascript" th:src="@{/javascript/popper.min.js}"></script>
 <script type="text/javascript" th:src="@{/javascript/bootstrap.bundle.min.js}"></script>
 <script type="text/javascript" th:src="@{/javascript/bootstrap.min.js}"></script>
-</body>
 
+</body>
 </html>

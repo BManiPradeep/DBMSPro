@@ -62,17 +62,17 @@
         <div class="row no-gutters">
             <div class="col-sm-5 d-flex justify-content-center mt-3">
                 <img class="" height="200px" width="200px"
-                     th:src="@{${'/productImages/' + product.image_path}}" th:alt="${product.ProductName}">
+                     th:src="@{${'/productImages/' + product.image_path}}" th:alt="${product.productName}">
             </div>
             <div class="col-sm-7 d-flex justify-content-center">
                 <div class="card-body">
-                    <h5 class="card-header" th:text="${product.ProductName}"></h5>
-                    <h7><strong>Price: ₹</strong> <span th:text="${product.Price}"></span></h7>
-                    <h7><strong>Description: </strong><span th:text="${product.ProductDescription}"></span></h7>
-                    <h7><strong>Stock Available: </strong><span th:text="${product.StockQuantity}"></span></h7>
-                    <a href="#" th:href="@{/shop/view_product/{id}(id=${product.ProductId})}"
+                    <h5 class="card-header" th:text="${product.productName}"></h5>
+                    <h7><strong>Price: ₹</strong> <span th:text="${product.price}"></span></h7>
+                    <h7><strong>Description: </strong><span th:text="${product.productDescription}"></span></h7>
+                    <h7><strong>Stock Available: </strong><span th:text="${product.stockQuantity}"></span></h7>
+                    <a href="#" th:href="@{/shop/view_product/{id}(id=${product.productId})}"
                        class="btn btn-primary">View Product</a>
-                    <a href="#" th:href="@{/addToCart/{prod_id}(prod_id=${product.ProductId})}"
+                    <a href="#" th:href="@{/addToCart/{prod_id}(prod_id=${product.productId})}"
                        class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>

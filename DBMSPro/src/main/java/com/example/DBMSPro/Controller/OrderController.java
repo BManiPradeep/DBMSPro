@@ -2,6 +2,7 @@ package com.example.DBMSPro.Controller;
 import com.example.DBMSPro.Models.Employee;
 import com.example.DBMSPro.Models.Order;
 import com.example.DBMSPro.Models.Product;
+import com.example.DBMSPro.Models.User;
 import com.example.DBMSPro.Repository.EmployeeRepository;
 import com.example.DBMSPro.Repository.OrderRepository;
 import com.example.DBMSPro.Repository.UserRepository;
@@ -56,9 +57,10 @@ public class OrderController {
 
     @GetMapping("/update_order/{order_id}")
     public String updateOrder(Model model, @PathVariable int order_id)
-    {    String user_type=securityServices.findLoggedInUser().getUser_type();
-        if(user_type.equals("USER"))
-        {      return "login";  }
+    {
+//        String user_type=securityServices.findLoggedInUser().getUser_type();
+//        if(user_type.equals("USER"))
+//        {      return "login";  }
 
         List<Employee> emp=employeeRepository.ListEmployees();
         model.addAttribute("emps",emp);
@@ -73,6 +75,38 @@ public class OrderController {
         int o= orderRepository.updateOrder(order, order_id);
         if(o==0)  return "error";
         return "redirect:/admin/Orders";
+    }
+
+
+    @GetMapping("/Orders")
+    public String getUserOrders(Model model){
+//        String user_type=securityServices.findLoggedInUser().getUser_type();
+//        if(user_type.equals("USER"))
+//        {      return "login";  }
+//        System.out.println("CAME INTO FUNC");
+        User user=securityServices.findLoggedInUser();
+        if(user==null){
+           return  "login";
+        }
+        int id= Math.toIntExact(user.getId());
+        List<Order> ord = orderRepository.getOrdersByUserId(id);
+        Map<Object, Object> employee= new HashMap<Object,Object>();
+        Map<Object, Object> users= new HashMap<Object,Object>();
+        for(Order eachOrder : ord) {
+            String emp_name=employeeRepository.GetEmployee(eachOrder.getEmp_id()).getEmp_fname();
+            employee.put(eachOrder,emp_name);
+            String user_name=userRepository.getUserById(eachOrder.getUser_id()).getUsername();
+            users.put(eachOrder,user_name);
+        }
+        model.addAttribute("employee",employee);
+        model.addAttribute("users", users);
+        model.addAttribute("orders", ord);
+        return "myorders";
+    }
+
+    @GetMapping("/viewOrder/{id}")
+    public String viewOrder(@PathVariable int id){
+        return "viewOrder";
     }
 
 }

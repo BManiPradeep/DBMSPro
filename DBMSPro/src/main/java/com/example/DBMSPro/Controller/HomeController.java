@@ -2,8 +2,10 @@ package com.example.DBMSPro.Controller;
 
 import com.example.DBMSPro.Models.User;
 import com.example.DBMSPro.Service.MyUserDetails;
+import com.example.DBMSPro.Service.SecurityServices;
 import com.example.DBMSPro.Service.UserService;
 import jakarta.servlet.http.HttpSession;
+import org.bouncycastle.math.raw.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,23 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
     private UserService userService;
+    private SecurityServices securityServices;
 
     @Autowired
-    public HomeController(UserService userService) {
+    public HomeController(UserService userService, SecurityServices securityServices) {
         this.userService = userService;
+        this.securityServices=securityServices;
     }
 
     @GetMapping(path={"/","/home"})
-    public String home(Authentication authentication){
-        System.out.println("In HOME");
-        if(authentication != null && authentication.isAuthenticated()){
-            MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
-            User user=myUserDetails.getUser();
-            System.out.println("This is Home");
-            String username = user.getUsername();
-            String userType = user.getUser_type();
-            System.out.println(user);
-        }//get authentication details of user logged in *************
+    public String home(Model model){
+        User user=securityServices.findLoggedInUser();
+        model.addAttribute("user",user);
+        //get authentication details of user logged in *************
         return "home";
     }
 

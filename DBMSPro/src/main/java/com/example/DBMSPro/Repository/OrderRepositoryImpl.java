@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -44,4 +46,11 @@ public class OrderRepositoryImpl implements  OrderRepository{
         return jdbcTemplate.queryForObject("SELECT * FROM orders WHERE order_id=? ",
                 new BeanPropertyRowMapper<Order>(Order.class),order_id);
     }
+
+    @Override
+    public List<Order> getOrdersByUserId(int id) {
+        return jdbcTemplate.query("SELECT * FROM orders WHERE user_id = ?", new BeanPropertyRowMapper<Order>(Order.class),id);
+    }
+
+
 }

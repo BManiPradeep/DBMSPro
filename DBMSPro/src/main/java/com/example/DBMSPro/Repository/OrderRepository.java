@@ -12,4 +12,6 @@ public interface OrderRepository {
     public List<Order> findAllOrders();
 
     public Order getOrderById(int order_id);
+
+    public List<Order> getOrdersByUserId(int id);
 }

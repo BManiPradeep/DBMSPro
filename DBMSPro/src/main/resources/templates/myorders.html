@@ -43,10 +43,9 @@
     <tr>
         <th scope="col">SN</th>
         <th scope="col">Order Id</th>
-        <th scope="col">Customer Id</th>
         <th scope="col">Delivery Agent</th>
         <th scope="col">Order Status</th>
-        <th scope="col">Update</th>
+        <th scope="col">View Order</th>
     </tr>
     </thead>
     <tbody>
@@ -54,12 +53,10 @@
     <tr th:each="order, iStat : ${orders}" th:with="user=${users.get(order)},employee=${employee.get(order)}">
         <th scope="row" th:text="${iStat.index + 1}"></th>
         <td th:text="${order.order_id}"></td>
-        <td th:text="${user}"></td>
-        <td th:text="${employee}"></td>
+        <td th:text="${order.emp_id}"></td>
         <td th:text="${order.order_status}"></td>
-        <td><a href="" th:href="@{/update_order/{id}(id=${order.order_id})}"
-               class="btn btn-warning">Update</a></td>
-
+        <td><a href="" th:href="@{/viewOrder/{id}(id=${order.order_id})}"
+               class="btn btn-warning">view</a></td>
     </tr>
     </tbody>
 </table>

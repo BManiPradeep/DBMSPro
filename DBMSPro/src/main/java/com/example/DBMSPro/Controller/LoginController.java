@@ -3,6 +3,7 @@ package com.example.DBMSPro.Controller;
 import com.example.DBMSPro.Models.User;
 import com.example.DBMSPro.Repository.UserRepository;
 import com.example.DBMSPro.Repository.UserRowMapper;
+import com.example.DBMSPro.Service.SecurityServices;
 import com.example.DBMSPro.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,11 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
     private final UserService userService;
     private final UserRepository userRepository;
+    private final SecurityServices securityServices;
 
     @Autowired
-    public LoginController(UserService userService,UserRepository userRepository) {
+    public LoginController(UserService userService,UserRepository userRepository,SecurityServices securityServices) {
         this.userService = userService;
         this.userRepository=userRepository;
+        this.securityServices=securityServices;
     }
 
     @GetMapping(value={"/signin","/login"})
@@ -39,9 +42,9 @@ public class LoginController {
     }
 
     @GetMapping("/user")
-    public String userpage(Model model, @AuthenticationPrincipal UserDetails userDetails){
-        User user= userService.loadUserByUsername(userDetails.getUsername()).getUser();
-        model.addAttribute(user);
+    public String userpage(Model model){
+        User user= securityServices.findLoggedInUser();
+        model.addAttribute("user",user);
         return "user";
     }
 

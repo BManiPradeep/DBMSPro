@@ -15,7 +15,6 @@ public class SecurityServices {
         if (myUserDetails instanceof MyUserDetails) {
             return ((MyUserDetails) myUserDetails).getUser().getUsername();
         }
-
         return null;
     }
 

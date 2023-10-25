@@ -85,13 +85,12 @@ create table cart_details
 
 create table employees
 (
-    emp_id int primary key auto_increment,
+    emp_id bigint primary key auto_increment,
     emp_fname varchar(20),
     emp_lname varchar(20),
     emp_email varchar(30),
     emp_gender char,
     emp_join_date date
-
 );
 
 create table orders
@@ -102,7 +101,6 @@ create table orders
     emp_id bigint default 1,
     foreign key (emp_id) references employees(emp_id) on update cascade on delete restrict,
     order_status varchar(30) default "Order Placed"
-
 );
 -- Adding tuples to DELIVERYPARTNER table
 INSERT INTO DELIVERYPARTNER (DFname, DLname, Rating, PhoneNo)
