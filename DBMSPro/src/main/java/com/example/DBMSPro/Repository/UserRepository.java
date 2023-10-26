@@ -24,23 +24,6 @@ public class UserRepository{
         this.roleRepository = roleRepository;
     }
 
-//    private final RowMapper<User> userRowMapper = (rs, rowNum) -> {
-//        User user = new User();
-//        user.setId(rs.getLong("id"));
-//        user.setFname(rs.getString("fname"));
-//        user.setLname(rs.getString("lname"));
-//        user.setUsername("username");
-//        user.setEmail(rs.getString("email"));
-//        user.setPassword(rs.getString("password"));
-//        user.setCity("city");
-//        user.setStreet("street");
-//        user.setPin(Long.valueOf("pin"));
-//        user.setUser_type("user_type");
-//        user.setRole(roleRepository.getRoleById(rs.getLong("roleId")));
-//        System.out.println(user);
-//        return user;
-//    };
-
 
     private HashMap<String, Object> getUserMap(User user) {
         System.out.println("Hello in get User Map");
