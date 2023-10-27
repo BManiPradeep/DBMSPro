@@ -32,7 +32,6 @@ public class Employee {
 
     public Employee( String emp_fname, String emp_lname, String emp_email, String emp_gender,
                     Date emp_join_date) {
-        this.emp_id= (int) ( UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
         this.emp_fname = emp_fname;
         this.emp_lname = emp_lname;
         this.emp_email = emp_email;
@@ -46,9 +45,6 @@ public class Employee {
         return emp_id;
     }
     public void setEmp_id(long emp_id) {
-        if(emp_id==0){
-            emp_id= (UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
-        }
         this.emp_id = emp_id;
     }
     public String getEmp_fname() {

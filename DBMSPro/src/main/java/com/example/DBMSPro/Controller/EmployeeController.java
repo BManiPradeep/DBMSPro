@@ -43,7 +43,7 @@ public class EmployeeController {
 //        if(user_type.equals("USER"))
 //        {      return "login";  }
 
-        List<Employee> emp=employeeRepository.ListEmployees();
+//        List<Employee> emp=employeeRepository.ListEmployees();
 //        model.addAttribute("employees",emp);
         model.addAttribute("employee",new Employee());
         return "add_employee";

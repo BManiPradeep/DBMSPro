@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Users</title>
+</head>
+
+<body>
+
+<h1>List of Offline Users</h1>
+
+<table border="1">
+    <tr>
+        <th>Date Purchased</th>
+        <th>Time Purchased</th>
+        <th>Phone Number</th>
+        <th>Tablet Description</th>
+    </tr>
+
+    <tr th:each="offlineUser : ${offlineUser}">
+        <td th:text="${offlineUser.date_purchased}"></td>
+        <td th:text="${offlineUser.time_purchased}"></td>
+        <td th:text="${offlineUser.phoneNumber}"></td>
+        <td th:text="${offlineUser.tabletDescription}"></td>
+    </tr>
+</table>
+
+</body>
+
+</html>

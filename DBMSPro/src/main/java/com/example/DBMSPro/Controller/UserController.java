@@ -21,7 +21,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/admin/users")
     @ResponseBody
     public List<User> getAllUsers(){
 //        return "All Students";

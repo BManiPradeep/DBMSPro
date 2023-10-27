@@ -59,18 +59,21 @@ public class CartController {
     public String DeletefromCart(@PathVariable long ProductId){
         long id=securityServices.findLoggedInUser().getId();
         cartRepository.DeleteFromCart(ProductId,id);
-        return "cart";
+        return "redirect:/cart";
     }
 
     @GetMapping("/checkout")
     public String checkout()
-    {   int user_id= Math.toIntExact(securityServices.findLoggedInUser().getId());
+    {
+        System.out.println("Came to checkout");
+        long user_id= securityServices.findLoggedInUser().getId();
         List<Cart> productsInCart = cartRepository.GetCart(user_id);
         int no_of_items=0;
         for (Cart cartProduct : productsInCart) {
             int prod_quantity= Math.toIntExact(productRepository.GetProductById(cartProduct.getProd_id()).getStockQuantity());
             int cart_quantity=cartProduct.getProd_quantity()  ;
             if(cart_quantity>prod_quantity) {
+                System.out.println("Error 1");
                 return "redirect:/cart?error=true";
             }
             no_of_items=no_of_items+1;
@@ -78,11 +81,15 @@ public class CartController {
 
         if(no_of_items==0)
         {
+            System.out.println("Error 2");
             return "redirect:/cart";
         }
 
-        int o=orderRepository.addOrder(user_id);
-        if(o==0)  return "error";
+        int o=orderRepository.addOrder((int) user_id);
+        if(o==0) {
+            System.out.println("Error 3");
+            return "error";
+        }
 
         for (Cart cartProduct : productsInCart) {
             productRepository.ReduceProductQuantity(cartProduct.getProd_quantity(),cartProduct.getProd_id());

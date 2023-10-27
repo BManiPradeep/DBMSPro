@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline User Form</title>
+</head>
+
+<body>
+
+<h1>Offline User Information</h1>
+
+<!--<form action="/submit-offline-user" th:object="offlineUser" method="post" role="form" >-->
+
+<!--    &lt;!&ndash; Date Purchased &ndash;&gt;-->
+<!--    <label for="DatePurchased">Date Purchased:</label>-->
+<!--    <input type="date" id="DatePurchased" name="datePurchased" required><br><br>-->
+
+<!--    &lt;!&ndash; Time Purchased &ndash;&gt;-->
+<!--    <label for="TimePurchased">Time Purchased:</label>-->
+<!--    <input type="time" id="TimePurchased" name="timePurchased" required><br><br>-->
+
+<!--    &lt;!&ndash; Phone Number &ndash;&gt;-->
+<!--    <label for="PhoneNumber">Phone Number:</label>-->
+<!--    <input type="tel" id="PhoneNumber" name="phoneNumber" required><br><br>-->
+
+<!--    &lt;!&ndash; Tablet Description &ndash;&gt;-->
+<!--    <label for="TabletDescription">Tablet Description:</label><br>-->
+<!--    <textarea id="TabletDescription" name="tabletDescription" rows="4" cols="50" required></textarea><br><br>-->
+
+<!--    <input type="submit" value="Submit">-->
+<!--</form>-->
+
+
+<div class="container">
+    <form th:action="@{/admin/offline}" method="post" th:object="${offlineUser}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group mt-3">
+                    <label for="PhoneNumber">PhoneNumber</label>
+                    <input type="text" class="form-control" required th:field="*{phoneNumber}" name="PhoneNumber" id="PhoneNumber"
+                           placeholder="PhoneNumber">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="TabletDescription">TabletDescription</label>
+                    <input type="text" class="form-control" required th:field="*{tabletDescription}" name="TabletDescription" id="TabletDescription"
+                           placeholder="Description">
+
+                </div>
+                <button type="submit" class="btn btn-outline-dark btn-lg px-15 mt-3">Submit</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+
+</html>

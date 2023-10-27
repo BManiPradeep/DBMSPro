@@ -93,6 +93,10 @@ public class OrderController {
         Map<Object, Object> employee= new HashMap<Object,Object>();
         Map<Object, Object> users= new HashMap<Object,Object>();
         for(Order eachOrder : ord) {
+            String order_stat=eachOrder.getOrder_status();
+            if(order_stat=="Delivered"||order_stat=="delivered"){
+                continue;
+            }
             String emp_name=employeeRepository.GetEmployee(eachOrder.getEmp_id()).getEmp_fname();
             employee.put(eachOrder,emp_name);
             String user_name=userRepository.getUserById(eachOrder.getUser_id()).getUsername();
@@ -101,7 +105,7 @@ public class OrderController {
         model.addAttribute("employee",employee);
         model.addAttribute("users", users);
         model.addAttribute("orders", ord);
-        return "myorders";
+        return "orders";
     }
 
     @GetMapping("/viewOrder/{id}")

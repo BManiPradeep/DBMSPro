@@ -63,16 +63,25 @@ CREATE TABLE PRODUCT (
 #                                      VerificationStatus VARCHAR(255),
 #                                      FOREIGN KEY (order_id) REFERENCES ORDERS(order_id)
 # );
-CREATE TABLE ORDERITEM (
-                           ItemId bigint AUTO_INCREMENT PRIMARY KEY,
-                           order_id bigint,
-                           ProductId bigint,
-                           Quantity INT,
-                           UnitPrice FLOAT,
-                           FOREIGN KEY (order_id) REFERENCES ORDERS(order_id),
-                           FOREIGN KEY (ProductId) REFERENCES PRODUCT(ProductId)
-);
+# CREATE TABLE ORDERITEM (
+#                            ItemId bigint AUTO_INCREMENT PRIMARY KEY,
+#                            order_id bigint,
+#                            ProductId bigint,
+#                            Quantity INT,
+#                            UnitPrice FLOAT,
+#                            FOREIGN KEY (order_id) REFERENCES ORDERS(order_id),
+#                            FOREIGN KEY (ProductId) REFERENCES PRODUCT(ProductId)
+# );
 
+create table OfflineUser
+(
+
+    Date_purchased date,
+    Time_purchased time,
+    PhoneNumber varchar(20),
+    TabletDescription varchar(255),
+    constraint pk primary key (Date_purchased,Time_purchased,PhoneNumber)
+);
 create table cart_details
 (
     user_id bigint ,
@@ -89,7 +98,7 @@ create table employees
     emp_fname varchar(20),
     emp_lname varchar(20),
     emp_email varchar(30),
-    emp_gender char,
+    emp_gender varchar(30),
     emp_join_date date
 );
 
@@ -189,4 +198,5 @@ INSERT INTO product (ProductName, ProductDescription, Price, StockQuantity, Supp
 VALUES ('Product1', 'Description1', 10.00, 100, 1,  'path1.jpg'),
        ('Product2', 'Description2', 20.00, 200, 2, 'path2.jpg');
 
--- Add more INSERT statements for the remaining 8 products
+
+INSERT INTO employees (emp_id,emp_fname,emp_lname,emp_email,emp_gender,emp_join_date) VALUES (1,"a","b","a@gmail.com","m","1995-05-06");
