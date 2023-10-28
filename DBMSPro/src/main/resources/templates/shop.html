@@ -76,7 +76,7 @@
                     <h7><strong>Stock Available: </strong><span th:text="${product.stockQuantity}"></span></h7>
                     <a href="#" th:href="@{/shop/view_product/{id}(id=${product.productId})}"
                        class="btn btn-primary">View Product</a>
-                    <a href="#" th:href="@{/addToCart/{prod_id}(prod_id=${product.productId})}"
+                    <a href="@{/addToCart/{prod_id}(prod_id=${product.productId})}" th:href="@{/addToCart/{prod_id}(prod_id=${product.productId})}"
                        class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>

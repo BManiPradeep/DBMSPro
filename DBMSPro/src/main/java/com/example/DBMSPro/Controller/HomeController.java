@@ -1,6 +1,7 @@
 package com.example.DBMSPro.Controller;
 
 import com.example.DBMSPro.Models.User;
+import com.example.DBMSPro.Repository.ProductRepository;
 import com.example.DBMSPro.Service.MyUserDetails;
 import com.example.DBMSPro.Service.SecurityServices;
 import com.example.DBMSPro.Service.UserService;
@@ -21,18 +22,20 @@ public class HomeController {
 
     private UserService userService;
     private SecurityServices securityServices;
+    private ProductRepository productRepository;
 
     @Autowired
-    public HomeController(UserService userService, SecurityServices securityServices) {
+    public HomeController(UserService userService, SecurityServices securityServices, ProductRepository productRepository) {
         this.userService = userService;
         this.securityServices=securityServices;
+        this.productRepository=productRepository;
     }
 
     @GetMapping(path={"/","/home"})
     public String home(Model model){
         User user=securityServices.findLoggedInUser();
         model.addAttribute("user",user);
-        //get authentication details of user logged in *************
+        model.addAttribute("products",productRepository.ListProducts());
         return "home";
     }
 
