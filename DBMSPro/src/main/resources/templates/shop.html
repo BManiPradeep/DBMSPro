@@ -29,6 +29,10 @@
         </button>
     </div>
     <div class="container-fluid">
+        <form action="/search" method="get">
+            <input type="text" id="query" name="query" required>
+            <input type="submit" value="Search">
+        </form>
         <ul class="nav navbar-nav">
             <li class="hoverable">
                 <a class="nav-link" th:href="@{/}" href="./home.html">Home</a>

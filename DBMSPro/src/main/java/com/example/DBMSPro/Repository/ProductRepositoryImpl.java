@@ -23,16 +23,16 @@ public class ProductRepositoryImpl implements ProductRepository {
                     "VALUES (?, ?, ?, ?, ?, ?)";
             return jdbcTemplate.update(sql, product.getProductName(), product.getProductDescription(),
                     product.getPrice(), product.getStockQuantity(), product.getSupplierId(), product.getImage_path());
-        } catch (Exception e){
+        } catch (Exception e) {
             return 0;
         }
     }
 
     @Override
     public int DeleteProduct(int ProductId) {
-        try{
-            String sql="DELETE FROM product where ProductId = ?";
-            return jdbcTemplate.update(sql,ProductId);
+        try {
+            String sql = "DELETE FROM product where ProductId = ?";
+            return jdbcTemplate.update(sql, ProductId);
         } catch (Exception e) {
             return 0;
         }
@@ -64,7 +64,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public List<Product> ListProducts() {
         String sql = "SELECT * FROM product";
-        List<Product> products = jdbcTemplate.query(sql,new BeanPropertyRowMapper<Product>(Product.class));
+        List<Product> products = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class));
         return products;
     }
 
@@ -83,7 +83,13 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public List<Product> ListAllProducts() {
-        String sql="SELECT * FROM product";
-        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<Product>(Product.class));
+        String sql = "SELECT * FROM product";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class));
+    }
+
+    @Override
+    public List<Product> FindByNameContaining(String query) {
+        String sql = "SELECT * FROM product where ProductName =?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class), query);
     }
 }

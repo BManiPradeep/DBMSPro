@@ -21,4 +21,5 @@ public interface ProductRepository {
 
     public List<Product> ListAllProducts();
 
+    List<Product> FindByNameContaining(String query);
 }

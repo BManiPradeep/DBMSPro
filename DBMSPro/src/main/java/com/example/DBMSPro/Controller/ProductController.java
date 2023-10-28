@@ -94,4 +94,12 @@ public class ProductController {
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return "redirect:/products";
     }
+
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        List<Product> product = productRepository.FindByNameContaining(query);
+        Map<Object, Object> products= new HashMap<Object,Object>();
+        model.addAttribute("products", product);
+        return "shop";  // This should be the name of your search results view
+    }
 }
