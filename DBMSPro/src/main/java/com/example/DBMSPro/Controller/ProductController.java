@@ -90,7 +90,7 @@ public class ProductController {
 
         int pr=productRepository.UpdateProduct(product, ProductId);
         if(pr==0)  return "error";
-        String uploadDir = "productImages/";
+        String uploadDir = "pro ductImages/";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return "redirect:/products";
     }
@@ -100,6 +100,6 @@ public class ProductController {
         List<Product> product = productRepository.FindByNameContaining(query);
         Map<Object, Object> products= new HashMap<Object,Object>();
         model.addAttribute("products", product);
-        return "shop";  // This should be the name of your search results view
+        return "home";  // This should be the name of your search results view
     }
 }

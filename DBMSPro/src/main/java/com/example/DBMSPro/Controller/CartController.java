@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.HashMap;
 import java.util.List;
@@ -54,9 +55,13 @@ public class CartController {
     @GetMapping("/addToCart/{prod_id}")
     public String addToCart(@PathVariable long prod_id )
     {
-        long user_id= (securityServices.findLoggedInUser().getId());
+        System.out.println("Came to add to cart");
+        User user=securityServices.findLoggedInUser();
+        if(user==null)
+            return "redirect:/login";
+        long user_id= (user.getId());
         long ct= cartRepository.AddToCart(prod_id,user_id);
-        return "redirect:/cart";
+        return "redirect:/home";
     }
 
     @GetMapping("/cart/removeItem/{ProductId}")

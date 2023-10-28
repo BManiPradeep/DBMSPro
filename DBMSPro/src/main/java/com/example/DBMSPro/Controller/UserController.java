@@ -35,14 +35,14 @@ public class UserController {
     }
 
     @PostMapping("/register/save")
-//    @ResponseBody
     public String registration(User user,
                                Model model){
         user.setUser_type("USER");
         userRepository.createUser(user);
         System.out.println(user.toString());
         model.addAttribute("user",user);
-        return "user";
+        model.addAttribute("role",user.getRole().getRoleName());
+        return "redirect:/login";
     }
 
     @GetMapping("/dashboard")
