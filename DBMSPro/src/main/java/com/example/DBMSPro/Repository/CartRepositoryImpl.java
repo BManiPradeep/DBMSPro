@@ -85,4 +85,16 @@ public class CartRepositoryImpl implements CartRepository {
                 Integer.class,prod_id,user_id);
         return quantity;
     }
+
+    @Override
+    public void UpdateCart(long productId, long id) {
+        jdbcTemplate.update("UPDATE cart_details SET prod_quantity = prod_quantity +? WHERE user_id = ? AND prod_id = ?",
+                5,id, productId);
+    }
+
+    @Override
+    public void DecreaseItem(long productId, long id) {
+        jdbcTemplate.update("UPDATE cart_details SET prod_quantity = prod_quantity -? WHERE user_id = ? AND prod_id = ?",
+                1,id, productId);
+    }
 }

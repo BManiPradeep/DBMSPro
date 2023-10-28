@@ -20,4 +20,8 @@ public interface CartRepository {
 
     public List<Cart> GetCart(long user_id);
     public int getQuantity(long prod_id,long user_id);
+
+    void UpdateCart(long productId, long id);
+
+    void DecreaseItem(long productId, long id);
 }

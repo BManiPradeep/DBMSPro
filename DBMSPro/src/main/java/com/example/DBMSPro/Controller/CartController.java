@@ -4,6 +4,7 @@ import com.example.DBMSPro.Models.Cart;
 import com.example.DBMSPro.Models.Product;
 import com.example.DBMSPro.Models.User;
 import com.example.DBMSPro.Repository.CartRepository;
+import com.example.DBMSPro.Repository.OrderItemRepository;
 import com.example.DBMSPro.Repository.OrderRepository;
 import com.example.DBMSPro.Repository.ProductRepository;
 import com.example.DBMSPro.Service.SecurityServices;
@@ -28,6 +29,9 @@ public class CartController {
     ProductRepository productRepository;
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    OrderItemRepository OrderItemRepository;
 
     @GetMapping("/cart")
     public String cart(Model model){
@@ -68,6 +72,7 @@ public class CartController {
         System.out.println("Came to checkout");
         long user_id= securityServices.findLoggedInUser().getId();
         List<Cart> productsInCart = cartRepository.GetCart(user_id);
+
         int no_of_items=0;
         for (Cart cartProduct : productsInCart) {
             int prod_quantity= Math.toIntExact(productRepository.GetProductById(cartProduct.getProd_id()).getStockQuantity());
@@ -90,11 +95,27 @@ public class CartController {
             System.out.println("Error 3");
             return "error";
         }
-
+        System.out.println("Order id is : ");
+        System.out.println(o);
         for (Cart cartProduct : productsInCart) {
             productRepository.ReduceProductQuantity(cartProduct.getProd_quantity(),cartProduct.getProd_id());
+            OrderItemRepository .addOrderItem(o,Math.toIntExact(cartProduct.getProd_id()),Math.toIntExact(cartProduct.getProd_quantity()));
         }
         int c= cartRepository.ClearCart(user_id);
         return "redirect:/cart?success=true";
+    }
+
+    @GetMapping("/cart/updateItem/{ProductId}")
+    public String UpdateCart(@PathVariable long ProductId){
+        long id=securityServices.findLoggedInUser().getId();
+        cartRepository.UpdateCart(ProductId,id);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/cart/decreaseitem/{ProductId}")
+    public String DecreaseItem(@PathVariable long ProductId){
+        long id=securityServices.findLoggedInUser().getId();
+        cartRepository.DecreaseItem(ProductId,id);
+        return "redirect:/cart";
     }
 }

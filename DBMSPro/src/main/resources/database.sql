@@ -111,6 +111,14 @@ create table orders
     foreign key (emp_id) references employees(emp_id) on update cascade on delete restrict,
     order_status varchar(30) default "Order Placed"
 );
+
+CREATE TABLE order_item (
+                        OrderId BIGINT ,
+                        ProductId BIGINT,
+                        Quantity BIGINT,
+    primary key (OrderId, ProductId)
+);
+
 -- Adding tuples to DELIVERYPARTNER table
 INSERT INTO DELIVERYPARTNER (DFname, DLname, Rating, PhoneNo)
 VALUES

@@ -94,7 +94,9 @@
                                             <a href="#!" th:href="@{/cart/removeItem/{ProductId}(ProductId=${cartProduct.ProductId})}" type="button"
                                                class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash-alt mr-1"></i> Remove item </a>
                                             <a href="#!" th:href="@{/cart/updateItem/{ProductId}(ProductId=${cartProduct.ProductId})}" type="button"
-                                               class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash-alt mr-1"></i> Update item Quantity </a>
+                                               class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash-alt mr-1"></i> Increase item Quantity </a>
+                                            <a href="#!" th:href="@{/cart/decreaseitem/{ProductId}(ProductId=${cartProduct.ProductId})}" type="button"
+                                               class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash-alt mr-1"></i> Decrease item Quantity </a>
                                         </div>
                                         <p class="mb-0"><span><strong>Price: ₹<span th:text="${cartProduct.Price}"></span></strong></span></p>
                                     </div>
