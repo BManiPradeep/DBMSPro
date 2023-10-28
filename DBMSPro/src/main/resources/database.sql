@@ -42,7 +42,7 @@ CREATE TABLE PRODUCT (
                          Price DECIMAL(10,2),
                          StockQuantity INT,
                          SupplierId bigint,
-                         image_path text,
+                         image_path varchar(255),
                         FOREIGN KEY (SupplierId) REFERENCES Supplier(SupplierId)
 );
 # CREATE TABLE ORDERS (
@@ -200,3 +200,5 @@ VALUES ('Product1', 'Description1', 10.00, 100, 1,  'path1.jpg'),
 
 
 INSERT INTO employees (emp_id,emp_fname,emp_lname,emp_email,emp_gender,emp_join_date) VALUES (1,"a","b","a@gmail.com","m","1995-05-06");
+
+insert into user values(101,"a","b","a","admin@gmail.com","12345",1,"Knl","xyz",123,"ADMIN","1990-06-15");
