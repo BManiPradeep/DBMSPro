@@ -1,45 +1,97 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Product List</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<h1>All Products</h1>-->
+
+<!--<table border="1">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Product ID</th>-->
+<!--        <th>Name</th>-->
+<!--        <th>Description</th>-->
+<!--        <th>Price</th>-->
+<!--        <th>Stock Quantity</th>-->
+<!--        <th scope="col">Update</th>-->
+<!--        <th scope="col">Remove</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    &lt;!&ndash; Iterate over the list of all products &ndash;&gt;-->
+<!--    <tr th:each="product : ${allproducts}">-->
+<!--        <td th:text="${product.productId}"></td>-->
+<!--        <td th:text="${product.productName}"></td>-->
+<!--        <td th:text="${product.productDescription}"></td>-->
+<!--        <td th:text="${product.price}"></td>-->
+<!--        <td th:text="${product.stockQuantity}"></td>-->
+<!--        <td><a href="" th:href="@{/update_product/{ProductId}(ProductId=${product.productId})}"-->
+<!--               class="btn btn-warning">Update</a></td>-->
+<!--&lt;!&ndash;        <td><a href="" th:href="@{/product/delete/{ProductId}(ProductId=${product.productId})}"&ndash;&gt;-->
+<!--&lt;!&ndash;               class="btn btn-danger">Remove</a></td>&ndash;&gt;-->
+<!--        <td><a th:href="@{/product/delete/{ProductId}(ProductId=${product.productId})}" class="btn btn-danger">Remove</a></td>-->
+
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+
+<!--<a th:href="@{/addProduct}" style="margin: 20px 0" class="btn btn-outline-secondary btn-lg px-15" href="./add_products.html"-->
+<!--   type="submit">Add Product</a>-->
+
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Product List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
-<h1>All Products</h1>
+<div class="container mt-4">
+    <h1 class="display-4">All Products</h1>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>Product ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Stock Quantity</th>
-        <th scope="col">Update</th>
-        <th scope="col">Remove</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Iterate over the list of all products -->
-    <tr th:each="product : ${allproducts}">
-        <td th:text="${product.productId}"></td>
-        <td th:text="${product.productName}"></td>
-        <td th:text="${product.productDescription}"></td>
-        <td th:text="${product.price}"></td>
-        <td th:text="${product.stockQuantity}"></td>
-        <td><a href="" th:href="@{/update_product/{ProductId}(ProductId=${product.productId})}"
-               class="btn btn-warning">Update</a></td>
-<!--        <td><a href="" th:href="@{/product/delete/{ProductId}(ProductId=${product.productId})}"-->
-<!--               class="btn btn-danger">Remove</a></td>-->
-        <td><a th:href="@{/product/delete/{ProductId}(ProductId=${product.productId})}" class="btn btn-danger">Remove</a></td>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock Quantity</th>
+            <th scope="col">Update</th>
+            <th scope="col">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over the list of all products -->
+        <tr th:each="product : ${allproducts}">
+            <td th:text="${product.productId}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.productDescription}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.stockQuantity}"></td>
+            <td>
+                <a th:href="@{/update_product/{ProductId}(ProductId=${product.productId})"
+                   class="btn btn-warning btn-sm">Update</a>
+            </td>
+            <td>
+                <a th:href="@{/product/delete/{ProductId}(ProductId=${product.productId})"
+                   class="btn btn-danger btn-sm">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-    </tr>
-    </tbody>
-</table>
+    <a th:href="@{/addProduct}" class="btn btn-outline-secondary btn-lg mt-3">Add Product</a>
+</div>
 
-
-<a th:href="@{/addProduct}" style="margin: 20px 0" class="btn btn-outline-secondary btn-lg px-15" href="./add_products.html"
-   type="submit">Add Product</a>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

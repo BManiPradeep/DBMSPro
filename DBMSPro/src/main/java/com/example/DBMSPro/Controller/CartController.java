@@ -61,7 +61,7 @@ public class CartController {
             return "redirect:/login";
         long user_id= (user.getId());
         long ct= cartRepository.AddToCart(prod_id,user_id);
-        return "redirect:/home";
+        return "redirect:/cart";
     }
 
     @GetMapping("/cart/removeItem/{ProductId}")
