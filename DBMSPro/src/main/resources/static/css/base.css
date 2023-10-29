@@ -1,5 +1,5 @@
 .nav-bar-icon {
-    max-width: 60%;
+    max-width: 40%;
     height: auto;
 }
 
@@ -109,9 +109,3 @@ hr.hr-text::before {
 .borderless td {
     border: none;
 }
-
-/* Your custom CSS */
-.right-align {
-    margin-left: auto;
-}
-
