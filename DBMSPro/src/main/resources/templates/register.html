@@ -191,19 +191,24 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/base.css">
+    <style>
+        .center-text{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/home">
+        <a class="navbar-brand" href="/register">
             <img class="custom-nav-bar-logo" src="/images/img.png"></img>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a class="nav-link" href="/signin">Login <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="/register">Sign Up <span class="sr-only">(current)</span></a>
+            <a class="nav-link right-align" href="/signin">Login <span class="sr-only">(current)</span></a>
+<!--            <a class="nav-link" href="/register">Sign Up <span class="sr-only">(current)</span></a>-->
 <!--            <a class="nav-link" href="/profile">-->
 <!--                <img class= "nav-bar-icon" src="{% static 'images/user.png' %}"></img>-->
 <!--                <span class="sr-only">(current)</span>-->
@@ -221,6 +226,9 @@
             <div class="col"></div>
             <div class="col-5">
                 <p class="card-text">
+                <h2 class="center-text">Sign Up</h2>
+                <br>
+                <p class="center-text text-white-30 mb-5">Please enter your details!</p>
                 <form th:action="@{/register/save}" th:object="${user}" method="post">
                     <div class="form-group mt-3">
                         <input type="text" name="fname" th:field="*{fname}" required placeholder="First Name:" class="form-control form-control-lg">
