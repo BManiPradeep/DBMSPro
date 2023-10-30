@@ -31,10 +31,10 @@ public class AdminController {
     public String adminHome()
     {
         System.out.println("CAME TO ADMIN");
-//        long roleId=securityServices.findLoggedInUser().getRole().getRoleId();
-//        System.out.println(roleId);
-//        if(roleId!=1)
-//        {      return "login";  }
+        long roleId=securityServices.findLoggedInUser().getRole().getRoleId();
+        System.out.println(roleId);
+        if(roleId!=1)
+        {      return "login";  }
 
 
         return "Admin";
@@ -42,9 +42,9 @@ public class AdminController {
 
     @GetMapping("/admin/Products")
     public String getProduct(Model model){
-//        String user_type=securityServices.findLoggedInUser().getUser_type();
-//        if(user_type.equals("USER"))
-//        {      return "login";  }
+        String user_type=securityServices.findLoggedInUser().getUser_type();
+        if(user_type.equals("USER"))
+        {      return "login";  }
         List<Product> pr = productRepository.ListAllProducts();
         Map<Object, Object> products= new HashMap<Object,Object>();
         model.addAttribute("allproducts", pr);

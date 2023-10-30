@@ -94,6 +94,7 @@ public class CartRepositoryImpl implements CartRepository {
 
     @Override
     public void DecreaseItem(long productId, long id) {
+
         jdbcTemplate.update("UPDATE cart_details SET prod_quantity = prod_quantity -? WHERE user_id = ? AND prod_id = ?",
                 1,id, productId);
     }

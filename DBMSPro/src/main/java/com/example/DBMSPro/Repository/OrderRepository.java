@@ -5,7 +5,7 @@ import com.example.DBMSPro.Models.Order;
 import java.util.List;
 
 public interface OrderRepository {
-    public int addOrder(int user_id);
+    public int addOrder(int user_id,String Address,long TotalPrice);
 
     public int updateOrder(Order order, int order_id);
 

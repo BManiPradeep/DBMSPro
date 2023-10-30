@@ -51,6 +51,10 @@ public class ProductRepositoryImpl implements ProductRepository {
                 + "StockQuantity = ?, SupplierId = ?, image_path = ? "
                 + "WHERE ProductId = ?";
 
+        System.out.println("Came to Update Product");
+        System.out.println(product.getProductName());
+        System.out.println(product.getImage_path());
+
         return jdbcTemplate.update(sql,
                 product.getProductName(),
                 product.getProductDescription(),

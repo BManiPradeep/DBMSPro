@@ -1,7 +1,9 @@
 package com.example.DBMSPro.Controller;
 
 import com.example.DBMSPro.FileUploadUtil;
+import com.example.DBMSPro.Models.Order;
 import com.example.DBMSPro.Models.Product;
+import com.example.DBMSPro.Repository.OrderRepository;
 import com.example.DBMSPro.Repository.ProductRepository;
 import com.example.DBMSPro.Service.SecurityServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -22,6 +26,8 @@ public class ProductController {
 
     private SecurityServices securityServices;
     private ProductRepository productRepository;
+
+    private OrderRepository orderRepository;
 
     @Autowired
     public ProductController(SecurityServices securityServices, ProductRepository productRepository) {
@@ -48,7 +54,7 @@ public class ProductController {
 
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute Product product,@RequestParam("productImage") MultipartFile multipartFile,Model model) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
         product.setImage_path(fileName);
 //        int pr=1;
         int pr=productRepository.AddProduct(product);
@@ -85,12 +91,13 @@ public class ProductController {
     @PostMapping("/update_product/{ProductId}")
     public String updateProductPOSTHandler(@ModelAttribute Product product, @PathVariable int ProductId,
                                            @RequestParam("productImage") MultipartFile multipartFile, Model model) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
         product.setImage_path(fileName);
 
         int pr=productRepository.UpdateProduct(product, ProductId);
+
         if(pr==0)  return "error";
-        String uploadDir = "pro ductImages/";
+        String uploadDir = "productImages/";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return "redirect:/products";
     }

@@ -1,17 +1,16 @@
 package com.example.DBMSPro.Repository;
 
-import com.example.DBMSPro.Models.Employee;
 import com.example.DBMSPro.Models.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.util.Collections;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -30,13 +29,17 @@ public class OrderRepositoryImpl implements  OrderRepository{
 //    }
 
     @Override
-    public int addOrder(int user_id) {
+    public int addOrder(int user_id,String Address,long TotalPrice) {
         KeyHolder keyHolder = new GeneratedKeyHolder(); // Create a KeyHolder to retrieve generated keys
 
         try {
+            LocalDate OrderedDate=LocalDate.now();
             jdbcTemplate.update(con -> {
-                PreparedStatement ps = con.prepareStatement("INSERT INTO orders(user_id) VALUES (?)", new String[]{"order_id"});
+                PreparedStatement ps = con.prepareStatement("INSERT INTO orders(user_id,Address,TotalPrice,Ordered_Date) VALUES (?,?,?,?)", new String[]{"order_id"});
                 ps.setInt(1, user_id);
+                ps.setString(2, Address);
+                ps.setLong(3,TotalPrice);
+                ps.setDate(4, Date.valueOf(OrderedDate));
                 return ps;
             }, keyHolder);
             // Access the generated ID
@@ -58,7 +61,8 @@ public class OrderRepositoryImpl implements  OrderRepository{
 
     @Override
     public List<Order> findAllOrders() {
-        return jdbcTemplate.query("SELECT * FROM orders ", new BeanPropertyRowMapper<Order>(Order.class));
+        return jdbcTemplate.query("SELECT * FROM orders ",
+                new BeanPropertyRowMapper<Order>(Order.class));
     }
 
     @Override
