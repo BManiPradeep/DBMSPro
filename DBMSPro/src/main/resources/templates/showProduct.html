@@ -93,10 +93,7 @@
 
     <h2 class="option1">Rs.</h2>
     <h2  class="option1" th:text="${product.Price}"></h2>
-
-    <div class="description">
-        This is a short description of the product. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    </div>
+    <div class="description" th:text="${product.ProductDescription}"></div>
     <a href="@{/addToCart/{prod_id}(prod_id=${product.productId})}" th:href="@{/addToCart/{prod_id}(prod_id=${product.productId})}"
        class="btn btn-success btn-block">Add to Cart</a>
 </div>
