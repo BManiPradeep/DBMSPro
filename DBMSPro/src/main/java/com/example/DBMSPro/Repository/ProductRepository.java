@@ -23,4 +23,7 @@ public interface ProductRepository {
 
     List<Product> FindByNameContaining(String query);
 
+    List<Product> findProductsByNameStartingWith(String name);
+
+
 }

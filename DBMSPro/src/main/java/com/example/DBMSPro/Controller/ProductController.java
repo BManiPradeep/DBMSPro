@@ -1,4 +1,5 @@
 package com.example.DBMSPro.Controller;
+import java.util.ArrayList;
 
 import com.example.DBMSPro.FileUploadUtil;
 import com.example.DBMSPro.Models.Order;
@@ -102,11 +103,18 @@ public class ProductController {
         return "redirect:/products";
     }
 
+//    @GetMapping("/search")
+//    public String search(@RequestParam String query, Model model) {
+//        List<Product> product = productRepository.FindByNameContaining(query);
+//        Map<Object, Object> products= new HashMap<Object,Object>();
+//        model.addAttribute("products", product);
+//        return "home";  // This should be the name of your search results view
+//    }
     @GetMapping("/search")
     public String search(@RequestParam String query, Model model) {
-        List<Product> product = productRepository.FindByNameContaining(query);
-        Map<Object, Object> products= new HashMap<Object,Object>();
-        model.addAttribute("products", product);
-        return "home";  // This should be the name of your search results view
+        List<Product> products = productRepository.findProductsByNameStartingWith(query);
+        model.addAttribute("products", products);
+        return "home";  // This should be the name of your search results view
     }
+
 }

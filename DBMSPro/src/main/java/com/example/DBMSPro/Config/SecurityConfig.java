@@ -35,8 +35,20 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
 //                        .requestMatchers("/admin").hasAnyRole("ADMIN")
 //                        .requestMatchers("/user").hasAnyRole("USER","ADMIN")
+//                        .requestMatchers("/add_employee").hasAnyRole("ADMIN") // Allow only users with ADMIN role
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/","/user","/admin","/search/**","/update_employee/**","/productImages/**","/update_product/{ProductId}","/addProduct","/user","viewOrder/**","/Orders/**","/update_order/{order_id}","/checkout","/add_employee/**","admin/**","/addToCart/**","/shop/**","/cart/**","/product/**","/product/delete/{ProductId}","/update_product/{prod_id}","/products","/addProduct","/resources/**","/home","/signin/**","/login/**","/register/**","/logout/**","/shop/**","/about/**","/css/**", "/js/**", "/images/**","/myorders/**").permitAll()
+                        .requestMatchers("/","/user","/admin","/search/**",
+                                "/update_employee/**","/productImages/**",
+                                "/update_product/{ProductId}","/addProduct",
+                                "/user","viewOrder/**","/Orders/**",
+                                "/update_order/{order_id}","/checkout",
+                                "/add_employee/**","admin/**","/addToCart/**",
+                                "/shop/**","/cart/**","/product/**",
+                                "/product/delete/{ProductId}","/update_product/{prod_id}",
+                                "/products","/addProduct","/resources/**","/home",
+                                "/signin/**","/login/**","/register/**","/logout/**",
+                                "/shop/**","/about/**","/css/**", "/js/**", "/images/**",
+                                "/myorders/**").permitAll()
 //                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

@@ -96,4 +96,12 @@ public class ProductRepositoryImpl implements ProductRepository {
         String sql = "SELECT * FROM product where ProductName =?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class), query);
     }
+
+    @Override
+    public List<Product> findProductsByNameStartingWith(String query) {
+        query += '%';
+        String sql = "SELECT * FROM product WHERE ProductName LIKE ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class), query);
+    }
+
 }

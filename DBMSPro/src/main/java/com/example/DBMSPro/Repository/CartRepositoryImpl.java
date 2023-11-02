@@ -20,7 +20,7 @@ public class CartRepositoryImpl implements CartRepository {
             return jdbcTemplate.update("INSERT INTO cart_details (user_id, prod_id) VALUES(?,?)"
                     ,user_id,prod_id ) ;
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             return jdbcTemplate.update("UPDATE cart_details SET prod_quantity = prod_quantity +? WHERE user_id = ? AND prod_id = ?",
                     1,user_id, prod_id);
