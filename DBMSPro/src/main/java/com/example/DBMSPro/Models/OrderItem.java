@@ -1,9 +1,5 @@
 package com.example.DBMSPro.Models;
 
-import jakarta.persistence.*;
-
-import java.util.UUID;
-
 public class OrderItem {
     private Long OrderId;
     private Long ProductId;
@@ -34,8 +30,8 @@ public class OrderItem {
         ProductId = productId;
     }
 
-    public Long getQuantity() {
-        return Quantity;
+    public Integer getQuantity() {
+        return Math.toIntExact(Quantity);
     }
 
     public void setQuantity(Long quantity) {

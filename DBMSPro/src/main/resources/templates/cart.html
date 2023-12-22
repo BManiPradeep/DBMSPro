@@ -238,7 +238,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0-beta3/css/all.min.css" integrity="sha384-...">
+    <style>
+        .centre-align{
+            text-align: center;
+        }
+    </style>
+    <style>
+        /* Center the form horizontally */
+        .center-form {
+            display:flex;
+            justify-content: center;
+            /*align-items: center;*/
+            height: 20vh;/*0 Makes the form full height of the viewport */
+        }
 
+        /* Style the form if needed */
+        form {
+            width: 700px;
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -262,7 +284,14 @@
             <!--            <a class="nav-link" href="{% url 'account_login' %}">Login <span class="sr-only">(current)</span></a>-->
             <!--            <a class="nav-link" href="{% url 'account_signup' %}">Sign Up <span class="sr-only">(current)</span></a>-->
             <!--            {% else %}-->
-            <a class="nav-link right-align" href="/user">
+<!--            <form action="/myorders"  method="get">-->
+<!--                <button onclick="href:location." class="nav-link right-align" type="submit">My Orders</button>-->
+<!--            </form>-->
+            <a class="nav-link right-align" href="/myorders">
+                <button type="submit">My Orders</button>
+                <span class="sr-only">(current)</span>
+            </a>
+            <a class="nav-link " href="/user">
                 <img class= "nav-bar-icon" src="/images/user.png"></img>
                 <span class="sr-only">(current)</span>
             </a>
@@ -310,45 +339,170 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0-beta3/css/all.min.css">
-</head>
-<body>
+
+
 <div class="container">
+    <h2 class="centre-align">My Cart</h2>
     <div class="row mb-4" th:each="cart: ${cart}" th:with="cartProduct=${cartProducts.get(cart)}">
         <div class="col-md-5 col-lg-3 col-xl-3 hover-zoom">
             <div class="mb-3 mb-md-0 mt-3 ml-3 mr-3">
                 <img class="mt-5" height="180px" width="180px" th:src="@{${'/productImages/' + cartProduct.image_path}}" alt="">
             </div>
         </div>
+
         <div class="col-md-5 col-lg-5 col-xl-7 mt-5 ml-5 hover-zoom">
             <div class="card md-3 ml-3 mr-3 ">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h6 class="card-header mb-3 text-uppercase small"><span th:text="${cartProduct.ProductName}"></span></h6>
-                        <h6 class="mb-3 text-uppercase small"><strong>Quantity: </strong><span th:text="${cart.prod_quantity}"></span></h6>
-                        <h6 class="mb-3 small"><strong>Description: </strong><span th:text="${cartProduct.ProductDescription}"></span></h6>
+                        <h5 class="card-header  mb-3  small" style="font-weight: bold; font-size: 24px;"><span th:text="${cartProduct.ProductName}"></span></h5>
+                        <h6  style="font-size: 20px;">
+                            <strong>&nbsp;&nbsp;Quantity: </strong>
+                            <a href="#!" th:if="${cart.prod_quantity>1}" th:href="@{/cart/decreaseitem/{ProductId}(ProductId=${cartProduct.ProductId})}" type="button"
+                               class="card-link-secondary small text-uppercase mr-3"><i style="color:orange; margin-left: 10px;" class="fas fa-minus fa-2x"></i> </a>
+                            <a href="#!" th:href="@{/cart/updateItem/{ProductId}(ProductId=${cartProduct.ProductId})}" type="button"
+                               class="card-link-secondary small text-uppercase mr-3"><i style="color:green; margin-left: 10px;" class="fas fa-plus fa-2x"></i> </a>
+                            <span th:text="${cart.prod_quantity}"></span></h6>
+                        <h6 class="mb-3 small"><strong>&nbsp;&nbsp;Description: </strong><span th:text="${cartProduct.ProductDescription}"></span></h6>
+                        <a href="#" th:href="@{/shop/view_product/{id}(id=${cartProduct.productId})}"
+                           class="btn btn-success btn-block">View Product</a>
+                        <p class="mb-0">
+                            <span><strong>Total Price: ₹<span th:text="${cart.prod_quantity * cartProduct.Price}"></span></strong></span>
+                        </p>
                     </div>
                 </div>
                 <div class="mt-3 d-flex justify-content-between align-items-center">
                     <div>
                         <a href="#!" th:href="@{/cart/removeItem/{ProductId}(ProductId=${cartProduct.ProductId})}" type="button"
-                           class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash"></i>  </a>
-                        <a href="#!" th:href="@{/cart/incrementItem/{ProductId}(ProductId=${cartProduct.ProductId})}" type="button"
-                           class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-plus"></i> </a>
-                        <a href="#!" th:href="@{/cart/decrementItem/{ProductId}(ProductId=${cartProduct.ProductId})}" type="button"
-                           class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-minus"></i> </a>
+                           class="card-link-secondary small text-uppercase mr-3"><i style="color:red; margin-left: 10px;"class="fas fa-trash fa-2x"></i>  </a>
                     </div>
-                    <p class="mb-0"><span><strong>Price: ₹<span th:text="${cartProduct.Price}"></span></strong></span></p>
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
-</html>
+
+<!--<div class="col-lg-4 centre-align">-->
+<!--    <div class="card mb-4 centre-align">-->
+<!--        <div class="card-body">-->
+
+<!--            <h5 class="card-header mb-3">Order Summary </h5>-->
+
+<!--            <ul class="list-group list-group-flush">-->
+<!--                <li-->
+<!--                        class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">-->
+<!--                    Total Amount:-->
+<!--                    <span>₹<span th:text="${cart_total}"></span></span>-->
+<!--                </li>-->
+<!--                <li class="list-group-item d-flex justify-content-between align-items-center px-0">-->
+<!--                    Shipping Amount:-->
+<!--                    <span>₹ 0</span>-->
+<!--                </li>-->
+<!--                <li-->
+<!--                        class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">-->
+<!--                    <div>-->
+<!--                        <strong>Net Payable Amount:</strong>-->
+<!--                    </div>-->
+<!--                    <span><strong>₹<span th:text="${cart_total}"></span></strong></span>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+<!--            <a th:href="@{/checkout}" h class="btn btn-warning">Place Order</a>-->
+<!--            <div class="alert alert-danger" role="alert" th:if="${param.error}">-->
+<!--                This order cannot be placed!! Please check if the mentioned quantity of product is available-->
+<!--            </div>-->
+<!--            <div class="alert alert-success" role="alert" th:if="${param.success}">-->
+<!--                Order placed successfully!-->
+<!--            </div>-->
+<!--            &lt;!&ndash;                        <div class="alert alert-success" role="alert" th:unless="${param.error}">&ndash;&gt;-->
+<!--            &lt;!&ndash;                            Order placed successfully!&ndash;&gt;-->
+<!--            &lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <button value="showAlert" onclick="showAlert();" th:href="@{/checkout}" h class="btn btn-warning"> Place Order</button>&ndash;&gt;-->
+<!--            <h1>-->
+
+<!--            </h1>-->
+<!--            &lt;!&ndash;                        <div class="container" style="display:none;" id="myAlert" mt-3>&ndash;&gt;-->
+<!--            &lt;!&ndash;                            <div class="alert alert-success alert-dismissable" id="myAlert2">&ndash;&gt;-->
+<!--            &lt;!&ndash;                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                Order placed successfully!&ndash;&gt;-->
+<!--            &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;                        </div>&ndash;&gt;-->
+
+
+
+<!--        </div>-->
+<!--    </div>-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 mx-auto"> <!-- Center the column -->
+            <div class="card mb-4">
+                <div class="card-body text-center"> <!-- Center-align the content -->
+
+                    <h5 class="card-header mb-3">Order Summary</h5>
+
+                    <ul class="list-group list-group-flush">
+                        <li
+                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                            Total Amount:
+                            <span>₹<span th:text="${cart_total}"></span></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            Shipping Amount:
+                            <span>₹ 0</span>
+                        </li>
+                        <li
+                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                            <div>
+                                <strong>Net Payable Amount:</strong>
+                            </div>
+                            <span><strong>₹<span th:text="${cart_total}"></span></strong></span>
+                        </li>
+                    </ul>
+
+
+<!--                    <a th:href="@{/checkout}" class="btn btn-warning">Place Order</a>-->
+
+            <div class="center-form">
+                    <form action="/checkout" method="post">
+                        <div class="form-group">
+                            <label for="Address">Address:</label>
+                            <input type="text" id="Address" name="Address" class="form-control" placeholder="Enter Delivery Address" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                    </form>
+            </div>
+
+                    <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                        This order cannot be placed! Please check if the mentioned quantity of the product is available.
+                    </div>
+
+                    <div class="alert alert-success" role="alert" th:if="${param.success}">
+                        Order placed successfully!
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Card -->
+
+<!--</div>-->
+
+
+<!--<div class="center-form">-->
+<!--<form action="/checkout" method="post">-->
+<!--    <div class="form-group">-->
+<!--        <label for="Address">Address:</label>-->
+<!--        <input type="text" id="Address" name="Address" class="form-control" required>-->
+<!--    </div>-->
+<!--    <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--</form>-->
+<!--</div>-->
+
 
 <!-- JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

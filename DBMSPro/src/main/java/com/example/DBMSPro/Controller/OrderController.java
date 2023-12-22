@@ -1,11 +1,6 @@
 package com.example.DBMSPro.Controller;
-import com.example.DBMSPro.Models.Employee;
-import com.example.DBMSPro.Models.Order;
-import com.example.DBMSPro.Models.Product;
-import com.example.DBMSPro.Models.User;
-import com.example.DBMSPro.Repository.EmployeeRepository;
-import com.example.DBMSPro.Repository.OrderRepository;
-import com.example.DBMSPro.Repository.UserRepository;
+import com.example.DBMSPro.Models.*;
+import com.example.DBMSPro.Repository.*;
 import com.example.DBMSPro.Service.SecurityServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 @Controller
 public class OrderController {
@@ -24,6 +18,10 @@ public class OrderController {
     private OrderRepository orderRepository;
     private EmployeeRepository employeeRepository;
     private UserRepository userRepository;
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     public OrderController(SecurityServices securityServices, OrderRepository orderRepository, EmployeeRepository employeeRepository, UserRepository userRepository) {
@@ -94,7 +92,7 @@ public class OrderController {
         Map<Object, Object> users= new HashMap<Object,Object>();
         for(Order eachOrder : ord) {
             String order_stat=eachOrder.getOrder_status();
-            if(order_stat=="Delivered"||order_stat=="delivered"){
+            if(Objects.equals(order_stat, "Delivered") || Objects.equals(order_stat, "delivered")){
                 continue;
             }
             String emp_name=employeeRepository.GetEmployee(eachOrder.getEmp_id()).getEmp_fname();
@@ -109,8 +107,20 @@ public class OrderController {
     }
 
     @GetMapping("/viewOrder/{id}")
-    public String viewOrder(@PathVariable int id){
+    public String viewOrder(@PathVariable int id,Model model){
+        User user=securityServices.findLoggedInUser();
+        if(user==null) return "login";
+        Map<Long, Integer> productQuantityMap = new HashMap<>();
+        List<Product> products=new ArrayList<>();
+        List<OrderItem> orderItems = orderItemRepository.getOrderitemsbyOrderId(id);
+        for(OrderItem orderItem : orderItems){
+            Product product=productRepository.GetProductById(orderItem.getProductId());
+            productQuantityMap.put(product.getProductId(),orderItem.getQuantity());
+            products.add(product);
+        }
+        System.out.println(products);
+        model.addAttribute("products",products);
+        model.addAttribute("productQuantityMap",productQuantityMap);
         return "viewOrder";
     }
-
 }
