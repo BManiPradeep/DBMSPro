@@ -1,9 +1,12 @@
 package com.example.DBMSPro.Repository;
 
 
+import com.example.DBMSPro.Models.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class OrderItemRepositoryImpl implements OrderItemRepository {
@@ -20,5 +23,20 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
         }catch (Exception e){
             return 0;
         }
+    }
+
+    @Override
+    public List<OrderItem> getOrderitemsbyOrderId(int order_id) {
+        String sql = "SELECT  *  FROM order_item WHERE OrderId = ?";
+
+        return jdbcTemplate.query(sql, new Object[]{order_id}, (rs, rowNum) -> {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrderId((long) order_id);
+//            orderItem.setOrderItemId(rs.getLong("order_item_id"));
+            orderItem.setProductId(rs.getLong("ProductId"));
+            orderItem.setQuantity(rs.getLong("Quantity"));
+            return orderItem;
+        });
+
     }
 }

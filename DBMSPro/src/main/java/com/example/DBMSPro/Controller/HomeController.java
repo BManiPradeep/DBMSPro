@@ -34,7 +34,11 @@ public class HomeController {
     @GetMapping(path={"/","/home"})
     public String home(Model model){
         User user=securityServices.findLoggedInUser();
+        if(user==null){
+            return "redirect:/login";
+        }
         model.addAttribute("user",user);
+        model.addAttribute("roleid",user.getRole().getRoleId());
         model.addAttribute("products",productRepository.ListProducts());
         return "home";
     }

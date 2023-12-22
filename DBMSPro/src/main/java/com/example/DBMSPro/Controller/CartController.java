@@ -1,6 +1,7 @@
 package com.example.DBMSPro.Controller;
 
 import com.example.DBMSPro.Models.Cart;
+import com.example.DBMSPro.Models.Order;
 import com.example.DBMSPro.Models.Product;
 import com.example.DBMSPro.Models.User;
 import com.example.DBMSPro.Repository.CartRepository;
@@ -34,6 +35,14 @@ public class CartController {
     @Autowired
     OrderItemRepository OrderItemRepository;
 
+    @GetMapping("/myorders")
+    public String getMyOrders(Model model){
+        System.out.println("HI");
+        int user_id= Math.toIntExact(securityServices.findLoggedInUser().getId());
+        List<Order> or = orderRepository.getOrdersByUserId(user_id);
+        model.addAttribute("orders", or);
+        return "/myorders";
+    }
     @GetMapping("/cart")
     public String cart(Model model){
         int user_id= Math.toIntExact(securityServices.findLoggedInUser().getId());
@@ -49,7 +58,7 @@ public class CartController {
         model.addAttribute("cart", cart);
         model.addAttribute("cartProducts", cartProducts);
         model.addAttribute("cart_total",cart_total);
-        return "cart";
+        return "/cart";
     }
 
     @GetMapping("/addToCart/{prod_id}")
@@ -61,7 +70,7 @@ public class CartController {
             return "redirect:/login";
         long user_id= (user.getId());
         long ct= cartRepository.AddToCart(prod_id,user_id);
-        return "redirect:/home";
+        return "redirect:/cart";
     }
 
     @GetMapping("/cart/removeItem/{ProductId}")
@@ -71,9 +80,10 @@ public class CartController {
         return "redirect:/cart";
     }
 
-    @GetMapping("/checkout")
-    public String checkout()
+    @PostMapping("/checkout")
+    public String checkout(String Address)
     {
+        System.out.println(Address);
         System.out.println("Came to checkout");
         long user_id= securityServices.findLoggedInUser().getId();
         List<Cart> productsInCart = cartRepository.GetCart(user_id);
@@ -94,8 +104,19 @@ public class CartController {
             System.out.println("Error 2");
             return "redirect:/cart";
         }
+//add address
+//        String Address="xyz";
 
-        int o=orderRepository.addOrder((int) user_id);
+
+        long cart_total=0;
+
+        for (Cart cartProduct : productsInCart) {
+            Product product = productRepository.GetProductById(cartProduct.getProd_id());
+//            cartProducts.put(cartProduct, product);
+            cart_total += (int) (product.getPrice() * cartProduct.getProd_quantity());
+        }
+
+        int o=orderRepository.addOrder((int) user_id,Address,cart_total);
         if(o==0) {
             System.out.println("Error 3");
             return "error";

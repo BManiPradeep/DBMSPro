@@ -135,7 +135,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>OG BALAJI</title>
+    <title>Online Medics</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -146,9 +146,9 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<!--        <a class="navbar-brand" href="/">-->
-<!--            <img class="custom-nav-bar-logo" src="/images/img.png"></img>-->
-<!--        </a>-->
+        <a class="navbar-brand" href="/">
+            <img class="custom-nav-bar-logo" src="/images/img.png"></img>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -158,31 +158,51 @@
                     <input id="query" name="query" class="form-control mr-sm-2" type="search" placeholder="Search Tablets..." aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+
             </ul>
 <!--            {% if not user.is_authenticated %}-->
 <!--            <a class="nav-link" href="{% url 'account_login' %}">Login <span class="sr-only">(current)</span></a>-->
 <!--            <a class="nav-link" href="{% url 'account_signup' %}">Sign Up <span class="sr-only">(current)</span></a>-->
 <!--            {% else %}-->
+
+<!--            <a class="nav-link" href="/Admin">-->
+<!--                Admin-->
+<!--                <span class="sr-only">(current)</span></a>-->
+
+            <a class="nav-link" th:if="${roleid==1}" th:href="@{/admin}" href="./admin.html">Admin</a>
+            <form action="/about" method="get">
+                                <button type="submit">About Us</button>
+                            </form>
             <a class="nav-link" href="/user">
                 <img class= "nav-bar-icon" src="/images/user.png"></img>
                 <span class="sr-only">(current)</span>
             </a>
+<!--            <form action="/myorders" method="get">-->
+<!--                <button type="submit">My Orders</button>-->
+<!--            </form>-->
+<!--            <a class="nav-link" href="/myorders">-->
+<!--                myorders-->
+<!--                <span class="sr-only">(current)</span></a>-->
 <!--            {% endif %}-->
             <a class="nav-link" href="/cart">
                 <img class="nav-bar-icon" src="/images/basket.png"></img>
                 <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/logout">
+                <i style="color:black;"class="fas fa-sign-out-alt fa-2x"></i>
+                <span class="sr-only">(current)</span>
+            </a>
         </div>
     </nav>
 </header>
 <br/>
-<div class="container">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <h4 class="text-center">This is an example website. orders are not tracked. avoid making payments.</h4>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</div>
+<!--<div class="container">-->
+<!--    <div class="alert alert-danger alert-dismissible fade show" role="alert">-->
+<!--        <h4 class="text-center">This is an example website. orders are not tracked. avoid making payments.</h4>-->
+<!--        <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--            <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 <style>
@@ -215,11 +235,11 @@
 
 
 
-<footer class="bg-light text-left text-lg-left">
-    <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.01);">
-        <a class="text-primary" style="text-decoration: none" href="/about">About Me</a>
-    </div>
-</footer>
+<!--<footer class="bg-light text-left text-lg-left">-->
+<!--    <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.01);">-->
+<!--        <a class="text-primary" style="text-decoration: none" href="/about">About Me</a>-->
+<!--    </div>-->
+<!--</footer>-->
 <!-- JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

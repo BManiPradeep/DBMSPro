@@ -50,8 +50,8 @@ public class UserRepository{
     public User createUser(User user) {
         if (user.getId()==0) user.setId(0L);// sets it to a random val.
         //set to USER Role
-        String sql = "INSERT INTO User (id,fname, lname,username, email, password, roleId,city,street,pin,user_type,dob) VALUES " +
-                "(:id,:fname, :lname,:username, :email, :password, :roleId,:city,:street,:pin,:user_type,:dob)";
+        String sql = "INSERT INTO User (fname, lname,username, email, password, roleId,city,street,pin,user_type,dob) VALUES " +
+                "(:fname, :lname,:username, :email, :password, :roleId,:city,:street,:pin,:user_type,:dob)";
 
         HashMap<String, Object> params = getUserMap(user);
         System.out.println("MAPS");

@@ -51,6 +51,10 @@ public class ProductRepositoryImpl implements ProductRepository {
                 + "StockQuantity = ?, SupplierId = ?, image_path = ? "
                 + "WHERE ProductId = ?";
 
+        System.out.println("Came to Update Product");
+        System.out.println(product.getProductName());
+        System.out.println(product.getImage_path());
+
         return jdbcTemplate.update(sql,
                 product.getProductName(),
                 product.getProductDescription(),
@@ -92,4 +96,12 @@ public class ProductRepositoryImpl implements ProductRepository {
         String sql = "SELECT * FROM product where ProductName =?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class), query);
     }
+
+    @Override
+    public List<Product> findProductsByNameStartingWith(String query) {
+        query += '%';
+        String sql = "SELECT * FROM product WHERE ProductName LIKE ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class), query);
+    }
+
 }

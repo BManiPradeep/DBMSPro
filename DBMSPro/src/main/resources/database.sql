@@ -109,7 +109,10 @@ create table orders
     foreign key (user_id) references user(id) ,
     emp_id bigint default 1,
     foreign key (emp_id) references employees(emp_id) on update cascade on delete restrict,
-    order_status varchar(30) default "Order Placed"
+    order_status varchar(30) default "Order Placed",
+    Address varchar(255),
+    TotalPrice bigint,
+    Ordered_Date date
 );
 
 CREATE TABLE order_item (
@@ -203,8 +206,8 @@ VALUES
 #     (9, 9, 10, 50.0),
 #     (10, 10, 11, 55.0);
 INSERT INTO product (ProductName, ProductDescription, Price, StockQuantity, SupplierId, image_path)
-VALUES ('Product1', 'Description1', 10.00, 100, 1,  'path1.jpg'),
-       ('Product2', 'Description2', 20.00, 200, 2, 'path2.jpg');
+VALUES ('Paracetomol', 'Description1', 10.00, 100, 1,  'paracetamol.png'),
+       ('DOLO', 'Description2', 20.00, 200, 2, 'dolo.jpeg');
 
 
 INSERT INTO employees (emp_id,emp_fname,emp_lname,emp_email,emp_gender,emp_join_date) VALUES (1,"a","b","a@gmail.com","m","1995-05-06");
